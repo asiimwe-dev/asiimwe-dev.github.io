@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asiimwe Gilbert | AI Engineer</title>
+    <style>
+        /* 1. VARIABLES: This is where we define our "Theme" */
+        :root {
+            --bg-color: #0a0f1c; /* Very dark blue */
+            --card-bg: rgba(30, 41, 59, 0.7); /* Semi-transparent blue */
+            --primary: #38bdf8; /* Bright Cyan */
+            --secondary: #94a3b8; /* Muted Grey */
+            --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            --font-main: 'Segoe UI', sans-serif;
+        }
+
+        /* 2. RESET & BODY: Setting the stage */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding: 2rem;
+            
+            /* This creates a subtle background glow */
+            background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 20%);
+        }
+
+        /* 3. LAYOUT: Centering the content */
+        .container {
+            max-width: 900px;
+            margin: 0 auto; /* Centers the container */
+        }
+
+        /* 4. HERO SECTION: The big intro */
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            /* The "Text Gradient" trick */
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* 5. BUTTON STYLING */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px; /* Makes it pill-shaped */
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s ease; /* Smooth movement */
+        }
+
+        .btn:hover {
+            transform: translateY(-3px); /* Moves up slightly on hover */
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); /* Glowing shadow */
+        }
+
+        /* 6. GRID SYSTEM: Organizing projects */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+            gap: 2rem;
+        }
+
+        /* 7. CARDS: The "Glass" look */
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary); /* Border lights up on hover */
+        }
+
+        .card h3 { margin-bottom: 0.5rem; color: #fff; }
+        
+        .tech-pill {
+            display: inline-block;
+            font-size: 0.8rem;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Asiimwe Gilbert</h1>
+            <p class="tagline">Student | AI & ML Engineer | Linux Enthusiast</p>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">
+                Merging the precision of <b>C</b> with the intelligence of <b>Python</b>.
+            </p>
+            <a href="https://github.com/asiimwe-dev" class="btn">View GitHub</a>
+        </header>
+
+        <h2 style="margin-bottom: 1.5rem;">Featured Engineering</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <h3>✈️ Airport Assistant</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">
+                    An interactive chatbot solving real-time passenger queries at Entebbe Airport. optimized for low-latency responses.
+                </p>
+                <div>
+                    <span class="tech-pill">Node.js</span>
+                    <span class="tech-pill">NLP</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🧠 Private AI Lab</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">
+                    Architected a local, offline AI environment on Zorin OS using Ollama/Alpaca to ensure data privacy.
+                </p>
+                <div>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Linux</span>
+                    <span class="tech-pill">Ollama</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⚡ C Systems & Algos</h3>
+                <p style="color: #cbd5e1; font-size: 0.95rem;">
+                    Low-level system utilities and memory management tools built to master the fundamentals of computing.
+                </p>
+                <div>
+                    <span class="tech-pill">C Language</span>
+                    <span class="tech-pill">Makefiles</span>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>Built by Asiimwe-Dev • 2026</p>
+        </footer>
+    </div>
+
+</body>
+</html>
