@@ -52,7 +52,6 @@
         .delay-5 { animation-delay: 0.7s; }
         .delay-6 { animation-delay: 0.9s; }
 
-        /* --- HEADER & PROFILE --- */
         header { text-align: center; padding: 4rem 0; margin-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
         
         .profile-img {
@@ -77,14 +76,12 @@
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
 
-        /* --- GRID & CARDS --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
 
         .card {
             background: var(--card-bg); padding: 2rem;
             border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease; cursor: pointer; /* Shows the hand icon */
-            position: relative; overflow: hidden;
+            transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;
         }
 
         .card:hover {
@@ -93,7 +90,6 @@
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
         
-        /* Hint text that appears on hover */
         .card::after {
             content: "Click to view details →";
             position: absolute; bottom: 1.5rem; right: 2rem;
@@ -109,71 +105,64 @@
             padding: 0.2rem 0.8rem; border-radius: 4px; margin-right: 0.5rem; margin-top: 1rem;
         }
 
-        /* --- MODAL (POPUP) STYLES --- */
-.modal-overlay {
-    display: none; /* Hidden by default */
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Slightly darker for better focus */
-    backdrop-filter: blur(5px); /* Blur effect */
-    z-index: 1000;
-}
+        /* --- UPDATED MODAL STYLES (WITH FORCE OVERRIDES) --- */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 1000;
+        }
 
-.modal-content {
-    position: fixed; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%; max-width: 700px;
-    background: #1e293b; /* Dark Blue-Grey Background */
-    padding: 2.5rem; border-radius: 16px;
-    border: 1px solid rgba(56, 189, 248, 0.2); /* Subtle Blue Border */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    animation: zoomIn 0.3s ease forwards;
-    max-height: 90vh; overflow-y: auto;
-}
+        .modal-content {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; max-width: 700px;
+            background: #1e293b; /* Set Dark Background */
+            padding: 2.5rem; border-radius: 16px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease forwards;
+            max-height: 90vh; overflow-y: auto;
+        }
 
-.close-btn {
-    position: absolute; top: 1rem; right: 1.5rem;
-    font-size: 2rem; color: #94a3b8; cursor: pointer;
-    transition: color 0.2s;
-}
-.close-btn:hover { color: #ffffff; }
+        .close-btn {
+            position: absolute; top: 1rem; right: 1.5rem;
+            font-size: 2rem; color: #94a3b8; cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-btn:hover { color: #ffffff; }
 
-/* FIX 1: Prevent Image Blurriness */
-.modal-img {
-    width: auto;           /* Don't force stretch width */
-    max-width: 100%;       /* Only shrink if image is huge */
-    max-height: 450px;     /* Prevent it from getting too tall */
-    display: block;        /* Required for centering */
-    margin: 1.5rem auto;   /* Center the image */
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-}
+        /* FIX: FORCE IMAGE SIZING */
+        .modal-img {
+            width: auto !important;       /* Do not stretch width */
+            max-width: 100% !important;   /* Do not overflow container */
+            max-height: 400px !important; /* Limit height */
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-/* FIX 2: High Contrast Text */
-.modal-text h2 { 
-    color: #38bdf8; /* Bright Cyan Heading */
-    margin-bottom: 1rem; 
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 0.5rem;
-}
+        /* FIX: FORCE TEXT COLOR TO WHITE */
+        .modal-text h2 { 
+            color: #38bdf8 !important; 
+            margin-bottom: 1rem; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        .modal-text p { 
+            color: #ffffff !important; /* Forces White Text */
+            margin-bottom: 1rem; 
+            font-size: 1.05rem; 
+            line-height: 1.7;
+        }
+        
+        .modal-text strong { color: #38bdf8 !important; }
 
-.modal-text p { 
-    color: #f1f5f9; /* Bright White-Grey Text (Easy to read) */
-    margin-bottom: 1rem; 
-    font-size: 1.05rem; 
-    line-height: 1.7;
-}
-
-/* Make bold text pure white */
-.modal-text strong {
-    color: #ffffff;
-    font-weight: 700;
-}
-
-.modal-code {
-    background: #0f172a; padding: 1rem; border-radius: 8px;
-    font-family: monospace; color: #a5b4fc; margin-top: 1rem; font-size: 0.9rem;
-    border: 1px solid rgba(255,255,255,0.1);
-}
+        .modal-code {
+            background: #0f172a; padding: 1rem; border-radius: 8px;
+            font-family: monospace; color: #a5b4fc; margin-top: 1rem; font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
         footer { text-align: center; margin-top: 4rem; color: var(--secondary); font-size: 0.9rem; }
     </style>
