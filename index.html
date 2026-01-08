@@ -7,8 +7,7 @@
     <style>
         :root {
             --bg-color: #0a0f1c;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --modal-bg: #1e293b;
+            --card-bg: #1e293b; /* Solid dark blue-grey */
             --primary: #38bdf8; 
             --secondary: #94a3b8;
             --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
@@ -27,31 +26,9 @@
             overflow-x: hidden;
         }
 
-        .container { max-width: 900px; margin: 0 auto; }
+        .container { max-width: 800px; margin: 0 auto; }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes zoomIn {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .reveal {
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.5s; }
-        .delay-5 { animation-delay: 0.7s; }
-        .delay-6 { animation-delay: 0.9s; }
-
+        /* --- HEADER STYLES --- */
         header { text-align: center; padding: 4rem 0; margin-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
         
         .profile-img {
@@ -76,93 +53,79 @@
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        /* --- EXPANDABLE CARD STYLES --- */
+        .grid { display: grid; grid-template-columns: 1fr; gap: 2rem; } /* Single column stack */
 
         .card {
-            background: var(--card-bg); padding: 2rem;
-            border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;
+            background: var(--card-bg);
+            border-radius: 16px; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden; /* Vital for the slide animation */
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
 
-        .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        .card:hover { border-color: var(--primary); }
+
+        /* The Visible Header */
+        .card-header {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .card-title h3 { font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
+        .card-title p { color: #cbd5e1; font-size: 0.95rem; }
         
-        .card::after {
-            content: "Click to view details →";
-            position: absolute; bottom: 1.5rem; right: 2rem;
-            font-size: 0.8rem; color: var(--primary); opacity: 0;
-            transition: opacity 0.3s;
+        /* The Arrow Icon */
+        .arrow {
+            font-size: 1.5rem; color: var(--primary);
+            transition: transform 0.3s ease;
         }
-        .card:hover::after { opacity: 1; }
 
-        .card h3 { margin-bottom: 0.5rem; color: #fff; }
+        /* The Hidden Content */
+        .card-details {
+            max-height: 0; /* Hidden by default */
+            opacity: 0;
+            padding: 0 2rem; /* No vertical padding when hidden */
+            background: rgba(0,0,0,0.2); /* Slightly darker background */
+            transition: all 0.5s ease-in-out; /* Smooth slide effect */
+        }
+
+        /* --- THE ACTIVE STATE (When Clicked) --- */
+        .card.active {
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .card.active .arrow { transform: rotate(180deg); } /* Flip the arrow */
+
+        .card.active .card-details {
+            max-height: 1000px; /* Big enough to fit content */
+            opacity: 1;
+            padding: 0 2rem 2rem 2rem; /* Add padding back */
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Image Styling inside Card */
+        .project-img {
+            width: 100%; 
+            height: auto; 
+            border-radius: 8px; 
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
         .tech-pill {
             display: inline-block; font-size: 0.8rem;
             background: rgba(56, 189, 248, 0.1); color: var(--primary);
             padding: 0.2rem 0.8rem; border-radius: 4px; margin-right: 0.5rem; margin-top: 1rem;
         }
 
-        /* --- UPDATED MODAL STYLES (WITH FORCE OVERRIDES) --- */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 1000;
-        }
-
-        .modal-content {
-            position: fixed; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%; max-width: 700px;
-            background: #1e293b; /* Set Dark Background */
-            padding: 2.5rem; border-radius: 16px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: zoomIn 0.3s ease forwards;
-            max-height: 90vh; overflow-y: auto;
-        }
-
-        .close-btn {
-            position: absolute; top: 1rem; right: 1.5rem;
-            font-size: 2rem; color: #94a3b8; cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-btn:hover { color: #ffffff; }
-
-        /* FIX: FORCE IMAGE SIZING */
-        .modal-img {
-            width: auto !important;       /* Do not stretch width */
-            max-width: 100% !important;   /* Do not overflow container */
-            max-height: 400px !important; /* Limit height */
-            display: block;
-            margin: 1.5rem auto;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* FIX: FORCE TEXT COLOR TO WHITE */
-        .modal-text h2 { 
-            color: #38bdf8 !important; 
-            margin-bottom: 1rem; 
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 0.5rem;
-        }
-        
-        .modal-text p { 
-            color: #ffffff !important; /* Forces White Text */
-            margin-bottom: 1rem; 
-            font-size: 1.05rem; 
-            line-height: 1.7;
-        }
-        
-        .modal-text strong { color: #38bdf8 !important; }
-
-        .modal-code {
-            background: #0f172a; padding: 1rem; border-radius: 8px;
-            font-family: monospace; color: #a5b4fc; margin-top: 1rem; font-size: 0.9rem;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .details-text { color: #cbd5e1; margin-bottom: 1rem; }
+        .details-text strong { color: #fff; }
 
         footer { text-align: center; margin-top: 4rem; color: var(--secondary); font-size: 0.9rem; }
     </style>
@@ -171,134 +134,95 @@
 
     <div class="container">
         <header>
-            <img src="assets/me.jpg" alt="Asiimwe Gilbert" class="profile-img reveal">
-            <div class="reveal delay-1"><h1>Asiimwe Gilbert</h1></div>
-            <p class="tagline reveal delay-2">Student | AI & ML Engineer | Linux Enthusiast</p>
-            <div class="reveal delay-3">
-                <a href="https://github.com/asiimwe-dev" class="btn">View GitHub</a>
-            </div>
+            <img src="assets/me.jpg" alt="Asiimwe Gilbert" class="profile-img">
+            <h1>Asiimwe Gilbert</h1>
+            <p class="tagline">Student | AI & ML Engineer | Linux Enthusiast</p>
+            <a href="https://github.com/asiimwe-dev" class="btn">View GitHub</a>
         </header>
 
-        <h2 class="reveal delay-4" style="margin-bottom: 1.5rem;">Featured Engineering</h2>
+        <h2 style="margin-bottom: 1.5rem;">Featured Engineering</h2>
         <div class="grid">
             
-            <div class="card reveal delay-4" onclick="openModal('modal-1')">
-                <h3>✈️ Airport Assistant</h3>
-                <p style="color: #cbd5e1; font-size: 0.95rem;">
-                    Interactive chatbot for Entebbe Airport flight data.
-                </p>
-                <div>
-                    <span class="tech-pill">HTML</span>
-                    <span class="tech-pill">CSS</span>
-                    <span class="tech-pill">JS</span>
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>✈️ Airport Assistant</h3>
+                        <p>Real-time passenger flight data bot.</p>
+                        <div>
+                            <span class="tech-pill">HTML</span>
+                            <span class="tech-pill">CSS</span>
+                            <span class="tech-pill">JS</span>
+                        </div>
+                    </div>
+                    <div class="arrow">↓</div>
+                </div>
+                
+                <div class="card-details">
+                    <p class="details-text"><strong>The Solution:</strong> A lightweight, web-based chatbot built with pure HTML/CSS to ensure instant loading on slow airport WiFi.</p>
+                    <img src="assets/chatbot.png" alt="Chatbot Screenshot" class="project-img">
+                    <p class="details-text">Optimized for mobile view and high-contrast accessibility.</p>
                 </div>
             </div>
 
-            <div class="card reveal delay-5" onclick="openModal('modal-2')">
-                <h3>🧠 Private AI Lab</h3>
-                <p style="color: #cbd5e1; font-size: 0.95rem;">
-                    Offline AI environment on Zorin OS using Ollama.
-                </p>
-                <div>
-                    <span class="tech-pill">Python</span>
-                    <span class="tech-pill">Linux</span>
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>🧠 Private AI Lab</h3>
+                        <p>Offline LLM environment on Linux.</p>
+                        <div>
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Ollama</span>
+                        </div>
+                    </div>
+                    <div class="arrow">↓</div>
+                </div>
+                
+                <div class="card-details">
+                    <p class="details-text"><strong>The Architecture:</strong> Running localized Llama 2 models on Zorin OS to study NLP without data privacy risks.</p>
+                    <img src="assets/ai-lab.png" alt="AI Lab Terminal" class="project-img">
                 </div>
             </div>
 
-            <div class="card reveal delay-6" onclick="openModal('modal-3')">
-                <h3>⚡ C Systems & Algos</h3>
-                <p style="color: #cbd5e1; font-size: 0.95rem;">
-                    Memory management and CLI tools.
-                </p>
-                <div>
-                    <span class="tech-pill">C Language</span>
-                    <span class="tech-pill">Makefiles</span>
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>⚡ C Systems & Algos</h3>
+                        <p>Memory management & CLI tools.</p>
+                        <div>
+                            <span class="tech-pill">C Language</span>
+                            <span class="tech-pill">Makefiles</span>
+                        </div>
+                    </div>
+                    <div class="arrow">↓</div>
+                </div>
+                
+                <div class="card-details">
+                    <p class="details-text"><strong>The Foundation:</strong> Low-level programming to master pointers, memory allocation, and system processes.</p>
+                    <img src="assets/c-code.png" alt="C Code" class="project-img">
                 </div>
             </div>
+
         </div>
 
-        <footer class="reveal delay-6"><p>Built by Asiimwe-Dev • 2026</p></footer>
-    </div>
-
-    <div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
-
-    <div id="modal-1" class="modal-content" style="display: none;">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <div class="modal-text">
-            <h2>✈️ Entebbe Airport Assistant</h2>
-            <p><strong>The Challenge:</strong> Travelers at Entebbe International Airport often struggle with slow information desks and confusing physical signage.</p>
-            <p><strong>The Solution:</strong> I developed a lightweight, web-based chatbot interface. The frontend is built with pure <strong>HTML and CSS</strong> to ensure it loads instantly on mobile devices, even with poor airport WiFi.</p>
-            
-            <img src="assets/chatbot.png" alt="Chatbot Screenshot" class="modal-img">
-            
-            <p><strong>Key Features:</strong></p>
-            <ul>
-                <li>• Real-time flight status queries.</li>
-                <li>• CSS animations for smooth chat bubbles.</li>
-                <li>• Fully responsive Flexbox layout.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="modal-2" class="modal-content" style="display: none;">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <div class="modal-text">
-            <h2>🧠 Private Local AI Lab</h2>
-            <p><strong>The Goal:</strong> To understand how Large Language Models (LLMs) function without relying on external APIs or risking data privacy.</p>
-            <p><strong>The Architecture:</strong> Running <strong>Ollama</strong> on a Linux (Zorin OS) environment. I configured Alpaca and Llama 2 models to run locally, optimizing system RAM usage.</p>
-            
-            <img src="assets/ai-lab.png" alt="Terminal Screenshot" class="modal-img">
-            
-            <div class="modal-code">
-                $ ollama run llama2<br>
-                >>> initializing model...<br>
-                >>> ready for input.<br>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-3" class="modal-content" style="display: none;">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <div class="modal-text">
-            <h2>⚡ C Systems & Memory Management</h2>
-            <p><strong>The Foundation:</strong> Before mastering AI, I wanted to master the machine. This project involves writing raw C code to handle pointers, memory allocation (malloc/free), and data structures manually.</p>
-            
-            <img src="assets/c-code.png" alt="VS Code Screenshot" class="modal-img">
-            
-            <p><strong>Learnings:</strong></p>
-            <ul>
-                <li>• Preventing memory leaks in long-running processes.</li>
-                <li>• Understanding Stack vs. Heap memory.</li>
-                <li>• Writing efficient Makefiles for compilation.</li>
-            </ul>
-        </div>
+        <footer>
+            <p>Built by Asiimwe-Dev • 2026</p>
+        </footer>
     </div>
 
     <script>
-        // Function to Open the Modal
-        function openModal(modalId) {
-            // Show the dark background
-            document.getElementById('modal-overlay').style.display = 'block';
+        function toggleCard(card) {
+            // 1. Toggle the 'active' class on the clicked card
+            card.classList.toggle('active');
             
-            // Show the specific modal content (1, 2, or 3)
-            document.getElementById(modalId).style.display = 'block';
-            
-            // Prevent the background page from scrolling
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        // Function to Close ALL Modals
-        function closeModal() {
-            // Hide the dark background
-            document.getElementById('modal-overlay').style.display = 'none';
-            
-            // Hide all modal contents
-            document.getElementById('modal-1').style.display = 'none';
-            document.getElementById('modal-2').style.display = 'none';
-            document.getElementById('modal-3').style.display = 'none';
-            
-            // Allow scrolling again
-            document.body.style.overflow = 'auto'; 
+            // OPTIONAL: If you want only ONE card open at a time, uncomment the lines below:
+            /*
+            const allCards = document.querySelectorAll('.card');
+            allCards.forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('active');
+                }
+            });
+            */
         }
     </script>
 
