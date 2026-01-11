@@ -213,16 +213,14 @@
         function toggleCard(card) {
             // 1. Toggle the 'active' class on the clicked card
             card.classList.toggle('active');
-            
-            // OPTIONAL: If you want only ONE card open at a time, uncomment the lines below:
-            /*
+            // 2. Close other cards when one is opened
             const allCards = document.querySelectorAll('.card');
             allCards.forEach(c => {
                 if (c !== card) {
                     c.classList.remove('active');
                 }
             });
-            */
+            
         }
     </script>
 
