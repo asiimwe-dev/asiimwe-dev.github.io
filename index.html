@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asiimwe Gilbert | AI Engineer</title>
+    <title>Asiimwe Gilbert | Systems Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0a0f1c;
-            --card-bg: #1e293b; /* Solid dark blue-grey */
+            --card-bg: #1e293b;
             --primary: #38bdf8; 
             --secondary: #94a3b8;
             --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            --gradient-alt: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
             --font-main: 'Segoe UI', sans-serif;
+            --accent-green: #10b981;
+            --accent-purple: #a855f7;
+            --accent-orange: #f97316;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,125 +27,784 @@
             font-family: var(--font-main);
             line-height: 1.6;
             padding: 2rem;
-            background-image: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 20%);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 25%);
             overflow-x: hidden;
         }
 
-        .container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* --- KEYFRAME ANIMATIONS --- */
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(56, 189, 248, 0.8), inset 0 0 30px rgba(56, 189, 248, 0.2); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slide-in {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @keyframes bounce-in {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slide-from-right {
+            from { 
+                opacity: 0; 
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slide-from-left {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
 
         /* --- HEADER STYLES --- */
-        header { text-align: center; padding: 4rem 0; margin-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        header { 
+            text-align: center; 
+            padding: 4rem 2rem; 
+            margin-bottom: 3rem; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            animation: bounce-in 0.8s ease-out;
+        }
         
+        .profile-container {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .profile-img {
-            width: 160px; height: 160px;
-            border-radius: 50%; object-fit: cover;
-            border: 4px solid rgba(56, 189, 248, 0.3);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.1);
+            animation: glow-pulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+
+
+
+        h1 {
+            font-size: 3rem; 
+            margin-bottom: 1rem;
+            background: var(--gradient); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            animation: slide-in 0.8s ease-out;
+        }
+
+        /* --- ANIMATED STATUS SECTION --- */
+        .status-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            animation: slide-in 1s ease-out 0.2s both;
+        }
+
+        .status-item {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            max-height: 70px;
+            overflow: hidden;
+        }
+
+        .status-item:hover {
+            background: rgba(56, 189, 248, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .status-item.expanded {
+            max-height: 300px;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1.5rem;
+        }
+
+        .status-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--secondary);
+        }
+
+        .status-item.expanded .status-details {
+            display: block;
+        }
+
+        .status-item.expanded > div:first-child {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .status-item.contributor { --accent: var(--accent-green); }
+        .status-item.student { --accent: var(--accent-purple); }
+        .status-item.developer { --accent: var(--accent-orange); }
+
+        .status-item.contributor { border-color: var(--accent-green); }
+        .status-item.student { border-color: var(--accent-purple); }
+        .status-item.developer { border-color: var(--accent-orange); }
+
+        .status-icon {
+            font-size: 1.3rem;
+        }
+
+        .status-item.contributor .status-icon { color: var(--accent-green); animation: badge-pulse 2s ease-in-out infinite; }
+        .status-item.student .status-icon { color: var(--accent-purple); animation: badge-pulse 2s ease-in-out infinite 0.3s; }
+        .status-item.developer .status-icon { color: var(--accent-orange); animation: badge-pulse 2s ease-in-out infinite 0.6s; }
+
+        .status-text strong { display: block; font-size: 0.85rem; color: var(--secondary); margin-bottom: 0.2rem; }
+
+        .tagline { 
+            font-size: 1.2rem; 
+            color: var(--secondary); 
+            margin-bottom: 1.5rem;
+            animation: slide-in 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            display: inline-block; 
+            padding: 0.8rem 2rem;
+            background: var(--gradient); 
+            color: white;
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: slide-in 1s ease-out 0.6s both;
+        }
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+        }
+
+        /* --- FUTURE PROJECTS CAROUSEL --- */
+        .projects-section {
+            margin: 4rem 0;
+            animation: slide-in 1s ease-out 0.8s both;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 100%;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(56, 189, 248, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .carousel-slide > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .carousel-image {
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(56, 189, 248, 0.3);
+            object-fit: cover;
+        }
+
+        .carousel-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce-in 0.6s ease-out;
+        }
+
+        .carousel-slide h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .carousel-slide p {
+            font-size: 1rem;
+            color: var(--secondary);
+            max-width: 500px;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .carousel-tech {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             margin-bottom: 1.5rem;
         }
 
-        h1 {
-            font-size: 3rem; margin-bottom: 1rem;
-            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .tagline { font-size: 1.2rem; color: var(--secondary); margin-bottom: 2rem; }
-
-        .btn {
-            display: inline-block; padding: 0.8rem 2rem;
-            background: var(--gradient); color: white;
-            border-radius: 50px; text-decoration: none; font-weight: bold;
-            transition: transform 0.2s ease;
-        }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
-
-        /* --- EXPANDABLE CARD STYLES --- */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 2rem; } /* Single column stack */
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px; 
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            overflow: hidden; /* Vital for the slide animation */
-            transition: all 0.3s ease;
-            cursor: pointer;
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            z-index: 10;
             position: relative;
         }
 
-        .card:hover { border-color: var(--primary); }
+        .carousel-btn {
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
 
-        /* The Visible Header */
+        .carousel-btn:hover {
+            background: var(--primary);
+            color: var(--bg-color);
+            transform: scale(1.1);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+
+        /* --- EXPANDABLE CARD STYLES --- */
+        .grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+
+        .card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(30, 41, 59, 0.8) 100%);
+            border-radius: 20px; 
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            animation: slide-in 0.8s ease-out both;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:nth-child(1) { animation-delay: 1s; }
+        .card:nth-child(2) { animation-delay: 1.1s; }
+        .card:nth-child(3) { animation-delay: 1.2s; }
+
+        .card:hover { 
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(30, 41, 59, 0.7) 100%);
+            box-shadow: 0 12px 48px rgba(56, 189, 248, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
         .card-header {
-            padding: 2rem;
+            padding: 1.5rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
         }
 
-        .card-title h3 { font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
-        .card-title p { color: #cbd5e1; font-size: 0.95rem; }
+        .card-title {
+            flex: 1;
+        }
+
+        .card-title h3 { 
+            font-size: 1.3rem; 
+            color: #fff; 
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
         
-        /* The Arrow Icon */
+        .card-title p { 
+            color: #cbd5e1; 
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
         .arrow {
-            font-size: 1.5rem; color: var(--primary);
-            transition: transform 0.3s ease;
+            font-size: 1.5rem; 
+            color: var(--primary);
+            transition: all 0.3s ease;
+            min-width: 30px;
+            text-align: right;
         }
 
-        /* The Hidden Content */
         .card-details {
-            max-height: 0; /* Hidden by default */
+            max-height: 0;
             opacity: 0;
-            padding: 0 2rem; /* No vertical padding when hidden */
-            background: rgba(0,0,0,0.2); /* Slightly darker background */
-            transition: all 0.5s ease-in-out; /* Smooth slide effect */
+            padding: 0 1.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            overflow: hidden;
         }
 
-        /* --- THE ACTIVE STATE (When Clicked) --- */
         .card.active {
             border-color: var(--primary);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 16px 48px rgba(56, 189, 248, 0.3);
         }
 
-        .card.active .arrow { transform: rotate(180deg); } /* Flip the arrow */
+        .card.active .arrow { 
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
 
         .card.active .card-details {
-            max-height: 1000px; /* Big enough to fit content */
+            max-height: 1000px;
             opacity: 1;
-            padding: 0 2rem 2rem 2rem; /* Add padding back */
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+            animation: expand-content 0.6s ease-out;
         }
 
-        /* Image Styling inside Card */
+        @keyframes expand-content {
+            from {
+                opacity: 0;
+                transform: scaleY(0);
+                transform-origin: top;
+            }
+            to {
+                opacity: 1;
+                transform: scaleY(1);
+                transform-origin: top;
+            }
+        }
+
         .project-img {
             width: 100%; 
-            height: auto; 
-            border-radius: 8px; 
-            margin: 1.5rem 0;
-            border: 1px solid rgba(255,255,255,0.1);
+            height: 280px;
+            object-fit: cover;
+            border-radius: 12px; 
+            margin: 1.2rem 0;
+            border: 2px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card.active .project-img {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.15);
         }
 
         .tech-pill {
-            display: inline-block; font-size: 0.8rem;
-            background: rgba(56, 189, 248, 0.1); color: var(--primary);
-            padding: 0.2rem 0.8rem; border-radius: 4px; margin-right: 0.5rem; margin-top: 1rem;
+            display: inline-block; 
+            font-size: 0.75rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(129, 140, 248, 0.1) 100%);
+            color: var(--primary);
+            padding: 0.4rem 0.9rem; 
+            border-radius: 20px; 
+            margin-right: 0.4rem; 
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            font-weight: 500;
         }
 
-        .details-text { color: #cbd5e1; margin-bottom: 1rem; }
-        .details-text strong { color: #fff; }
+        .tech-pill:hover {
+            background: rgba(56, 189, 248, 0.25);
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+        }
 
-        footer { text-align: center; margin-top: 4rem; color: var(--secondary); font-size: 0.9rem; }
+        .details-text { 
+            color: #cbd5e1; 
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .details-text strong { 
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        /* --- SOCIAL MEDIA FOOTER --- */
+        footer {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            animation: slide-in 1.2s ease-out both;
+        }
+
+        .social-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1.5px solid var(--primary);
+            border-radius: 50%;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--bg-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+        }
+
+        .social-link.github {
+            --accent: #6e40aa;
+        }
+
+        .social-link.twitter {
+            --accent: #1da1f2;
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .social-link.twitter:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .social-link.linkedin {
+            --accent: #0077b5;
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .social-link.linkedin:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .social-link.email {
+            --accent: #ea4335;
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .social-link.email:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 1.5rem auto;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .container { max-width: 100%; }
+            
+            h1 { font-size: 2rem; }
+            
+            .section-title { font-size: 1.5rem; }
+            
+            .carousel-slide {
+                padding: 2rem 1rem;
+            }
+
+            .carousel-icon {
+                font-size: 3rem;
+            }
+
+            .carousel-slide h3 {
+                font-size: 1.3rem;
+            }
+
+            .status-container {
+                flex-direction: column;
+            }
+
+            .status-item {
+                width: 100%;
+            }
+
+            .profile-container::before {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <img src="assets/me.jpg" alt="Asiimwe Gilbert" class="profile-img">
+            <div class="profile-container">
+                <img src="assets/me.jpg" alt="Asiimwe Gilbert" class="profile-img">
+            </div>
             <h1>Asiimwe Gilbert</h1>
-            <p class="tagline">Student | AI & ML Engineer | Linux Enthusiast</p>
-            <a href="https://github.com/asiimwe-dev" class="btn">View GitHub</a>
+            
+            <!-- Animated Status Display -->
+            <div class="status-container">
+                <div class="status-item student" onclick="toggleStatusDetails(this)">
+                    <div>
+                        <span class="status-icon">🎓</span>
+                        <div>
+                            <strong>Education</strong>
+                            <span>Undergrad CS Student</span>
+                        </div>
+                    </div>
+                    <div class="status-details">
+                        Currently pursuing a degree in Computer Science, with a passion for building technologies and automated systems that solve real-world problems. Actively learning full-stack development, system design, and AI/ML concepts.
+                    </div>
+                </div>
+                <div class="status-item contributor" onclick="toggleStatusDetails(this)">
+                    <div>
+                        <span class="status-icon">🔗</span>
+                        <div>
+                            <strong>Open Source</strong>
+                            <span>Active Contributor</span>
+                        </div>
+                    </div>
+                    <div class="status-details">
+                        Contributing to open-source projects and collaborating with the community. I believe in the power of collective innovation and sharing knowledge with developers worldwide.
+                    </div>
+                </div>
+                <div class="status-item developer" onclick="toggleStatusDetails(this)">
+                    <div>
+                        <span class="status-icon">🏗️</span>
+                        <div>
+                            <strong>Focus Area</strong>
+                            <span>Platform Development</span>
+                        </div>
+                    </div>
+                    <div class="status-details">
+                        Specializing in building scalable, enterprise-grade platforms. Currently focused on creating solutions for the Oil & Gas sector and agricultural technology that bridge the gap between farmers and markets.
+                    </div>
+                </div>
+            </div>
+
+            <p class="tagline">Building scalable solutions for real-world problems | AI Full Stack and Systems Engineer</p>
+            <a href="https://github.com/asiimwe-dev" class="btn">View My Work</a>
         </header>
 
-        <h2 style="margin-bottom: 1.5rem;">Featured Engineering</h2>
+        <!-- Future Projects Carousel -->
+        <div class="projects-section">
+            <h2 class="section-title">🚀 Future Projects</h2>
+            <div class="carousel-container">
+                <div class="carousel-inner" id="carousel">
+                    <!-- Slide 1: Oil & Gas API Platform -->
+                    <div class="carousel-slide">
+                        <div class="carousel-icon">⛽</div>
+                        <img src="assets/oil and gas.jpg" alt="Oil & Gas Industry" class="carousel-image">
+                        <h3>Oil & Gas Industry API</h3>
+                        <p>A comprehensive RESTful API platform designed for the oil and gas sector, enabling real-time data management, resource monitoring, and seamless integration with enterprise systems.</p>
+                        <div class="carousel-tech">
+                            <span class="tech-pill">Node.js</span>
+                            <span class="tech-pill">PostgreSQL</span>
+                            <span class="tech-pill">AWS</span>
+                            <span class="tech-pill">Docker</span>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Farmer Collaboration Platform -->
+                    <div class="carousel-slide">
+                        <div class="carousel-icon">🌾</div>
+                        <img src="assets/agriculture.jpg" alt="Farmer Community" class="carousel-image">
+                        <h3>FarmCon - Farmer Community Network</h3>
+                        <p>A digital platform connecting farmers across regions to share agricultural experiences, solve common farming challenges, and link directly with investors and commodity buyers.</p>
+                        <div class="carousel-tech">
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">Firebase</span>
+                            <span class="tech-pill">Mobile-First</span>
+                            <span class="tech-pill">Maps API</span>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: More features -->
+                    <div class="carousel-slide">
+                        <div class="carousel-icon">💡</div>
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop" alt="Problem Solving" class="carousel-image">
+                        <h3>Problem-Solving is My Passion</h3>
+                        <p>I'm focused on identifying real-world problems and building scalable, user-centric solutions. These platforms represent my commitment to creating technology that makes a tangible difference in communities.</p>
+                        <div class="carousel-tech">
+                            <span class="tech-pill">User Research</span>
+                            <span class="tech-pill">System Design</span>
+                            <span class="tech-pill">Full Stack</span>
+                            <span class="tech-pill">DevOps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <div style="text-align: center;">
+                <div class="carousel-controls">
+                    <button class="carousel-btn" onclick="prevSlide()">❮</button>
+                    <button class="carousel-btn" onclick="nextSlide()">❯</button>
+                </div>
+                <div class="carousel-dots" id="dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom: 1.5rem; margin-top: 4rem; font-size: 1.8rem;">Featured Engineering</h2>
         <div class="grid">
             
             <div class="card" onclick="toggleCard(this)">
@@ -172,13 +836,15 @@
                         <div>
                             <span class="tech-pill">Python</span>
                             <span class="tech-pill">Ollama</span>
+                            <span class="tech-pill">Fedora</span>
+                            <span class="tech-pill">Open WebUI</span>
                         </div>
                     </div>
                     <div class="arrow">↓</div>
                 </div>
                 
                 <div class="card-details">
-                    <p class="details-text"><strong>The Architecture:</strong> Running localized Llama 2 models on Zorin OS to study NLP without data privacy risks.</p>
+                    <p class="details-text"><strong>The Architecture:</strong> Running localized AI models on Fedora 43 to study NLP without data privacy risks.</p>
                     <img src="assets/ai-lab.png" alt="AI Lab Terminal" class="project-img">
                 </div>
             </div>
@@ -191,6 +857,7 @@
                         <div>
                             <span class="tech-pill">C Language</span>
                             <span class="tech-pill">Makefiles</span>
+                            <span class="tech-pill">Linux CLI</span>
                         </div>
                     </div>
                     <div class="arrow">↓</div>
@@ -205,23 +872,101 @@
         </div>
 
         <footer>
-            <p>Built by Asiimwe-Dev • 2026</p>
+            <div class="footer-divider"></div>
+            <div class="social-section">
+                <h3 class="social-title">Let's Connect 🤝</h3>
+                <div class="social-links">
+                    <a href="https://github.com/asiimwe-dev" class="social-link github" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/asiimwe_dev" class="social-link twitter" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/asiimwe-gilbert" class="social-link linkedin" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:asimgilbs744@gmail.com" class="social-link email" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://instagram.com/that_gilbert.amooti" class="social-link instagram" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-text">
+                <p> Built with passion by Asiimwe Gilbert • 2026</p>
+                <p style="font-size: 0.8rem; color: #64748b; margin-top: 1rem;">Designed & developed with modern web technologies</p>
+            </div>
         </footer>
     </div>
 
     <script>
+        // Status Item Toggle Functionality
+        function toggleStatusDetails(item) {
+            item.classList.toggle('expanded');
+            const allStatusItems = document.querySelectorAll('.status-item');
+            allStatusItems.forEach(s => {
+                if (s !== item) {
+                    s.classList.remove('expanded');
+                }
+            });
+        }
+
+        // Card Toggle Functionality
         function toggleCard(card) {
-            // 1. Toggle the 'active' class on the clicked card
             card.classList.toggle('active');
-            // 2. Close other cards when one is opened
             const allCards = document.querySelectorAll('.card');
             allCards.forEach(c => {
                 if (c !== card) {
                     c.classList.remove('active');
                 }
             });
-            
         }
+
+        // Carousel Functionality
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function showSlide(n) {
+            const carousel = document.getElementById('carousel');
+            if (n >= totalSlides) currentSlide = 0;
+            if (n < 0) currentSlide = totalSlides - 1;
+            
+            const translateX = -currentSlide * 100;
+            carousel.style.transform = `translateX(${translateX}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        function currentSlideNav(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        // Auto-advance carousel every 8 seconds
+        setInterval(nextSlide, 8000);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(currentSlide);
+        });
     </script>
 
 </body>
