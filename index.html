@@ -112,6 +112,13 @@
             animation: glow-pulse 3s ease-in-out infinite;
             position: relative;
             z-index: 2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.8), inset 0 0 25px rgba(56, 189, 248, 0.2);
         }
 
 
@@ -509,11 +516,81 @@
             margin: 1.2rem 0;
             border: 2px solid rgba(56, 189, 248, 0.2);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .card.active .project-img {
             border-color: var(--primary);
             box-shadow: 0 8px 24px rgba(56, 189, 248, 0.15);
+        }
+
+        .project-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fade-in 0.3s ease-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            animation: zoom-in 0.3s ease-out;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 2rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoom-in {
+            from { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .tech-pill {
@@ -630,8 +707,15 @@
             color: var(--accent);
         }
 
-        .social-link.email:hover {
-            background: var(--accent);
+        .social-link.instagram {
+            --accent: #e1306c;
+            border-color: var(--accent);
+            color: var(--accent);
+            background: linear-gradient(45deg, rgba(225, 48, 108, 0.1), rgba(245, 175, 56, 0.05));
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #e1306c, #feda75);
             color: white;
         }
 
@@ -650,11 +734,22 @@
 
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
-            .container { max-width: 100%; }
+            .container { 
+                max-width: 100%; 
+                padding: 1rem;
+            }
             
-            h1 { font-size: 2rem; }
+            header {
+                padding: 2rem 1rem;
+            }
             
-            .section-title { font-size: 1.5rem; }
+            h1 { 
+                font-size: 2.2rem;
+            }
+            
+            .section-title { 
+                font-size: 1.6rem;
+            }
             
             .carousel-slide {
                 padding: 2rem 1rem;
@@ -665,15 +760,39 @@
             }
 
             .carousel-slide h3 {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
+            }
+
+            .carousel-slide p {
+                font-size: 0.95rem;
             }
 
             .status-container {
                 flex-direction: column;
+                gap: 1rem;
             }
 
             .status-item {
                 width: 100%;
+                padding: 1rem;
+                max-height: none;
+            }
+
+            .status-details {
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .profile-container {
+                width: 180px;
+                height: 180px;
+                margin: 0 auto 1.5rem;
+            }
+
+            .profile-img {
+                width: 180px;
+                height: 180px;
             }
 
             .profile-container::before {
@@ -681,9 +800,136 @@
                 height: 200px;
             }
 
+            .card-header {
+                padding: 1rem;
+            }
+
+            .card-title h3 {
+                font-size: 1.1rem;
+            }
+
+            .card-title p {
+                font-size: 0.8rem;
+            }
+
+            .card-details {
+                padding: 0 1rem;
+            }
+
+            .card.active .card-details {
+                padding: 1rem;
+            }
+
+            .project-img {
+                height: 250px;
+                margin: 1rem 0;
+            }
+
+            .tech-pill {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.7rem;
+                margin-right: 0.3rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .details-text {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .grid {
+                gap: 1.5rem;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .lightbox-image {
+                max-height: 80vh;
+            }
+
+            .lightbox-close {
+                top: -35px;
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.8rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
             .profile-img {
-                width: 200px;
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-container::before {
+                width: 170px;
+                height: 170px;
+            }
+
+            .card-header {
+                padding: 0.8rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .card-title h3 {
+                font-size: 1rem;
+            }
+
+            .arrow {
+                align-self: flex-start;
+            }
+
+            .project-img {
                 height: 200px;
+                margin: 0.8rem 0;
+            }
+
+            .carousel-icon {
+                font-size: 2.5rem;
+            }
+
+            .carousel-slide h3 {
+                font-size: 1.2rem;
+            }
+
+            .carousel-slide p {
+                font-size: 0.9rem;
+            }
+
+            .tech-pill {
+                font-size: 0.65rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -693,7 +939,7 @@
     <div class="container">
         <header>
             <div class="profile-container">
-                <img src="assets/me.jpg" alt="Asiimwe Gilbert" class="profile-img">
+                <img src="assets/me.jpg" alt="Asiimwe Gilbert" class="profile-img" onclick="openLightbox(this.src)">
             </div>
             <h1>Asiimwe Gilbert</h1>
             
@@ -900,6 +1146,14 @@
         </footer>
     </div>
 
+    <!-- Image Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="Full Size Image">
+        </div>
+    </div>
+
     <script>
         // Status Item Toggle Functionality
         function toggleStatusDetails(item) {
@@ -922,6 +1176,44 @@
                 }
             });
         }
+
+        // Lightbox Functionality
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        // Close lightbox when clicking outside the image
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.addEventListener('click', function(event) {
+                if (event.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Add click handlers to project images
+            const projectImages = document.querySelectorAll('.project-img');
+            projectImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    openLightbox(this.src);
+                });
+            });
+        });
+
+        // Close lightbox with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
 
         // Carousel Functionality
         let currentSlide = 0;
