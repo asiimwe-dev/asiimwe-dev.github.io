@@ -79,6 +79,31 @@ export const PROJECTS: Project[] = [
   }
 ];
 
+export interface EngineeringLog {
+  id: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  tags: string[];
+}
+
+export const ENGINEERING_LOGS: EngineeringLog[] = [
+  {
+    id: "log-1",
+    date: "May 2026",
+    title: "Optimizing Linux Kernel for Low-Latency Audio",
+    excerpt: "Exploring real-time patches and memory locking for high-performance DSP applications.",
+    tags: ["Linux", "C", "Performance"]
+  },
+  {
+    id: "log-2",
+    date: "April 2026",
+    title: "Building a Distributed Agri-Tech Mesh",
+    excerpt: "Architecting a resilient network for remote farmers using LoRaWAN and edge computing.",
+    tags: ["Systems", "IoT", "Networking"]
+  }
+];
+
 export const ACADEMIC = {
   institution: "Mbarara University of Science and Technology (MUST)",
   achievement: "4.13 CGPA",
