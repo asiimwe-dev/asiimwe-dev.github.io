@@ -1,22 +1,40 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Section from '../ui/Section';
-import { Mail, Send, Loader2 } from 'lucide-react';
+import { Mail, Send, Loader2, CheckCircle2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formRef.current) return;
+
     setIsSubmitting(true);
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setError(null);
+
+    try {
+      await emailjs.sendForm(
+        'service_c0nwniu', 
+        'template_1hbyewt',
+        formRef.current,
+        '9iNbL_qYzCE4wmWMX'
+      );
+
       setIsSent(true);
+      formRef.current.reset();
       setTimeout(() => setIsSent(false), 5000);
-    }, 2000);
+    } catch (err) {
+      console.error('EmailJS Error:', err);
+      setError('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -25,23 +43,25 @@ const Contact = () => {
         {/* Decorative blur */}
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px]" />
         
-        <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-bold text-secondary uppercase tracking-widest">Name</label>
+              <label htmlFor="user_name" className="text-sm font-bold text-secondary uppercase tracking-widest">Name</label>
               <input
                 type="text"
-                id="name"
+                id="user_name"
+                name="user_name"
                 required
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all text-white"
                 placeholder="John Doe"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-bold text-secondary uppercase tracking-widest">Email</label>
+              <label htmlFor="user_email" className="text-sm font-bold text-secondary uppercase tracking-widest">Email</label>
               <input
                 type="email"
-                id="email"
+                id="user_email"
+                name="user_email"
                 required
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all text-white"
                 placeholder="john@example.com"
@@ -52,6 +72,7 @@ const Contact = () => {
             <label htmlFor="message" className="text-sm font-bold text-secondary uppercase tracking-widest">Message</label>
             <textarea
               id="message"
+              name="message"
               required
               rows={5}
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all text-white resize-none"
@@ -59,6 +80,10 @@ const Contact = () => {
             />
           </div>
           
+          {error && (
+            <p className="text-red-400 text-sm font-medium animate-pulse">{error}</p>
+          )}
+
           <button
             type="submit"
             disabled={isSubmitting || isSent}
@@ -67,7 +92,9 @@ const Contact = () => {
             {isSubmitting ? (
               <Loader2 className="animate-spin" />
             ) : isSent ? (
-              "Message Transmitted!"
+              <>
+                <CheckCircle2 size={18} /> Message Transmitted!
+              </>
             ) : (
               <>
                 Send Message <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
