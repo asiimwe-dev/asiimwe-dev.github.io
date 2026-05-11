@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
     image: "/assets/agriculture.jpg",
     icon: "🌾",
     tech: ["Flutter", "Dart", "Firebase", "Mobile-First", "FastAPI", "AI Diagnostics"],
-    githubUrl: "https://github.com/asiimwe-dev",
+    githubUrl: "https://github.com/asiimwe-dev/FarmLink-UG",
     liveUrl: "#"
   },
   {
@@ -54,10 +54,11 @@ export const PROJECTS: Project[] = [
     id: "audioguard",
     title: "AudioGuard",
     description: "Security-focused audio processing tool moving to production.",
-    image: "/assets/c-code.png",
+    image: "/assets/audioguard.png",
     icon: "🔊",
     tech: ["Flutter", "Dart", "FastAPI", "Signal Processing", "Python"],
-    githubUrl: "https://github.com/asiimwe-dev"
+    githubUrl: "https://github.com/asiimwe-dev/AudioGuard",
+    liveUrl: "#"
   },
   {
     id: "entebbe-bot",
@@ -66,7 +67,7 @@ export const PROJECTS: Project[] = [
     image: "/assets/chatbot.png",
     icon: "✈️",
     tech: ["HTML", "CSS", "JS", "NLP"],
-    githubUrl: "https://github.com/asiimwe-dev",
+    githubUrl: "https://github.com/asiimwe-dev/EntebbeChatBot",
     liveUrl: "#"
   },
   {
