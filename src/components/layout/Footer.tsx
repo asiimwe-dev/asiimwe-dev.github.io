@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <footer className="mt-20 py-10 border-t border-white/10">
       <div className="container mx-auto px-4 text-center">
-        <h3 className="text-xl font-semibold mb-6 text-secondary">Let's Connect 🤝</h3>
+        <h3 className="text-xl font-semibold mb-6 text-secondary">Let&apos;s Connect 🤝</h3>
         <div className="flex justify-center gap-6 mb-8">
           {socialLinks.map((link) => (
             <a

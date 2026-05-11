@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Section from '../ui/Section';
-import { PERSONAL_INFO } from '@/data/portfolio';
 import { User, Cpu } from 'lucide-react';
 
 const About = () => {
@@ -11,14 +10,14 @@ const About = () => {
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 text-lg text-secondary leading-relaxed">
           <p>
-            Hello! I'm <span className="text-white font-semibold">Asiimwe Gilbert</span>, a Systems Engineer with a deep passion for architecting solutions that bridge the gap between complex technology and regional socio-economic needs.
+            Hello! I&apos;m <span className="text-white font-semibold">Asiimwe Gilbert</span>, a Systems Engineer with a deep passion for architecting solutions that bridge the gap between complex technology and regional socio-economic needs.
           </p>
           <p>
-            My journey is driven by the <span className="text-primary italic">Systems Mindset</span>: viewing every problem not just as a bug to be fixed, but as a component in a larger ecosystem. Whether it's optimizing energy grids or digitizing agricultural supply chains, I focus on scalability, security, and impact.
+            My journey is driven by the <span className="text-primary italic">Systems Mindset</span>: viewing every problem not just as a bug to be fixed, but as a component in a larger ecosystem. Whether it&apos;s optimizing energy grids or digitizing agricultural supply chains, I focus on scalability, security, and impact.
           </p>
           <div className="glass-card p-6 rounded-2xl border-l-4 border-l-primary">
             <p className="text-sm italic">
-              "Building technology isn't just about code; it's about engineering systems that empower communities and drive economic evolution."
+              &quot;Building technology isn&apos;t just about code; it&apos;s about engineering systems that empower communities and drive economic evolution.&quot;
             </p>
           </div>
         </div>

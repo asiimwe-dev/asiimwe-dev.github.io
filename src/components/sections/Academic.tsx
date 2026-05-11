@@ -4,7 +4,6 @@ import React from 'react';
 import Section from '../ui/Section';
 import { ACADEMIC } from '@/data/portfolio';
 import { GraduationCap, Award, BookOpen } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const Academic = () => {
   return (
@@ -46,7 +45,7 @@ const Academic = () => {
           <div className="text-sm font-bold uppercase tracking-widest text-secondary">Cumulative GPA</div>
           <div className="mt-6 w-full h-[1px] bg-white/10" />
           <p className="mt-6 text-sm text-secondary italic">
-            "Education is the foundation upon which I build sustainable systems."
+            &quot;Education is the foundation upon which I build sustainable systems.&quot;
           </p>
         </div>
       </div>

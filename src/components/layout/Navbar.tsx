@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Home, User, LayoutGrid, GraduationCap, Cpu, BookText, Mail } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const navLinks = [

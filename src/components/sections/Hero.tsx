@@ -4,30 +4,40 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { PERSONAL_INFO } from '@/data/portfolio';
 import { Terminal, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 const BinaryRain = () => {
-  const [columns, setColumns] = useState<number>(0);
+  const [columns, setColumns] = useState<number>(20);
 
   useEffect(() => {
-    setColumns(Math.floor(window.innerWidth / 20));
+    const handleResize = () => {
+      setColumns(Math.floor(window.innerWidth / 60));
+    };
+    
+    handleResize(); // Initial call
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none select-none flex justify-around">
       {Array.from({ length: columns }).map((_, i) => (
         <div key={i} className="flex flex-col text-[10px] leading-none text-primary whitespace-nowrap">
-          {Array.from({ length: 20 }).map((_, j) => (
+          {Array.from({ length: 10 }).map((_, j) => (
             <motion.span
               key={j}
+              initial={{ opacity: 0, y: -20 }}
               animate={{
                 opacity: [0, 1, 0],
-                y: [0, 20, 40],
+                y: [0, 40, 80],
               }}
               transition={{
-                duration: 2 + Math.random() * 3,
+                duration: 3 + Math.random() * 4,
                 repeat: Infinity,
                 delay: Math.random() * 5,
+                ease: "linear"
               }}
+              style={{ willChange: "transform, opacity" }}
             >
               {Math.round(Math.random())}
             </motion.span>
@@ -49,17 +59,19 @@ const Hero = () => {
         transition={{ duration: 0.8 }}
         className="relative mb-8"
       >
-        <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary shadow-[0_0_30px_rgba(56,189,248,0.5)]">
-          <img
+        <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary shadow-[0_0_30px_rgba(56,189,248,0.5)] relative">
+          <Image
             src="/assets/me.jpg"
             alt={PERSONAL_INFO.name}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            fill
+            className="object-cover transition-transform duration-500 hover:scale-110"
+            priority
           />
         </div>
         <motion.div
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute -bottom-2 -right-2 bg-primary text-midnight p-2 rounded-full"
+          className="absolute -bottom-2 -right-2 bg-primary text-midnight p-2 rounded-full z-10"
         >
           <Terminal size={20} />
         </motion.div>

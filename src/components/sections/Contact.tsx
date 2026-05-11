@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Section from '../ui/Section';
 import { Mail, Send, Loader2 } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
