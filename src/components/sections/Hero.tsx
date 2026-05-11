@@ -8,8 +8,10 @@ import Image from 'next/image';
 
 const BinaryRain = () => {
   const [columns, setColumns] = useState<number>(20);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleResize = () => {
       setColumns(Math.floor(window.innerWidth / 60));
     };
@@ -18,6 +20,8 @@ const BinaryRain = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  if (!mounted) return <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none select-none" />;
 
   return (
     <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none select-none flex justify-around">
