@@ -25,6 +25,7 @@ export const PERSONAL_INFO = {
   linkedin: "https://linkedin.com/in/gilbert-asiimwe",
   twitter: "https://x.com/asiimwe_dev",
   instagram: "https://instagram.com/that_gilbert.amooti",
+  whatsapp: "https://wa.me/256764502179",
   resumeUrl: "/assets/resume.pdf"
 };
 

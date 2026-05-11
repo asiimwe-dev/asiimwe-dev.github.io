@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail, Instagram } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Instagram, MessageCircle } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data/portfolio';
 
 const Footer = () => {
@@ -11,6 +11,7 @@ const Footer = () => {
     { icon: <Twitter className="w-5 h-5" />, href: PERSONAL_INFO.twitter, label: 'Twitter' },
     { icon: <Mail className="w-5 h-5" />, href: `mailto:${PERSONAL_INFO.email}`, label: 'Email' },
     { icon: <Instagram className="w-5 h-5" />, href: PERSONAL_INFO.instagram, label: 'Instagram' },
+    { icon: <MessageCircle className="w-5 h-5" />, href: PERSONAL_INFO.whatsapp, label: 'WhatsApp' },
   ];
 
   return (
