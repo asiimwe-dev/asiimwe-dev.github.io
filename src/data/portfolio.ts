@@ -20,7 +20,7 @@ export const PERSONAL_INFO = {
   role: "AI Full-Stack & Systems Engineer",
   tagline: "Building scalable solutions for real-world problems | AI Full Stack and Systems Engineer",
   bio: "Senior CS student at Mbarara University of Science and Technology (MUST) with a 4.13 CGPA. Passionate about solving regional economic challenges through energy and agri-tech innovations. Systems-oriented mindset focused on scalability and efficiency.",
-  email: "asimgilbs744@gmail.com",
+  email: "gilbertasiimwe00@gmail.com",
   github: "https://github.com/asiimwe-dev",
   linkedin: "https://linkedin.com/in/gilbert-asiimwe",
   twitter: "https://x.com/asiimwe_dev",
