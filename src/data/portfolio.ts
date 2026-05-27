@@ -33,10 +33,10 @@ export const PROJECTS: Project[] = [
   {
     id: "farmerhub-UG",
     title: "FarmerHub-UG",
-    description: "Agricultural ecosystem connecting Ugandan farmers to investors and AI diagnostics.",
+    description: "AI-Powered Agri-RegTech Platform for Deforestation-Free Global Supply Chains across Uganda and East Africa. By leveraging offline-first technology, we empower agricultural cooperatives, exporters, and lenders with high-fidelity field data, AI-driven yield forecasting, and export-grade traceability.",
     image: "/assets/agriculture.jpg",
     icon: "🌾",
-    tech: ["Flutter", "Dart", "Firebase", "Mobile-First", "FastAPI", "AI Diagnostics"],
+    tech: ["Flutter", "Dart", "SQL-lite", "PostgreSQL", "FastAPI", "Giospatial", "PostGIS",],
     githubUrl: "https://github.com/asiimwe-dev/FarmerHub-UG",
     liveUrl: "#"
   },
