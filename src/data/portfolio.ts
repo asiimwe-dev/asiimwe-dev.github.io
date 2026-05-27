@@ -31,13 +31,13 @@ export const PERSONAL_INFO = {
 
 export const PROJECTS: Project[] = [
   {
-    id: "farmlink",
-    title: "FarmLink",
+    id: "farmerhub-UG",
+    title: "FarmerHub-UG",
     description: "Agricultural ecosystem connecting Ugandan farmers to investors and AI diagnostics.",
     image: "/assets/agriculture.jpg",
     icon: "🌾",
     tech: ["Flutter", "Dart", "Firebase", "Mobile-First", "FastAPI", "AI Diagnostics"],
-    githubUrl: "https://github.com/asiimwe-dev/FarmLink-UG",
+    githubUrl: "https://github.com/asiimwe-dev/FarmerHub-UG",
     liveUrl: "#"
   },
   {
