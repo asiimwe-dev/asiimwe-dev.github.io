@@ -111,20 +111,26 @@ const BinaryRain = () => {
 
   useEffect(() => {
     const generateRain = () => {
-      const columns = Math.floor(window.innerWidth / 60);
+      // Significantly reduce density: increase spacing from 60px to 120px
+      const columns = Math.floor(window.innerWidth / 120);
       const data = Array.from({ length: columns }).map(() => ({
-        delay: `${(Math.random() * 8).toFixed(2)}s`,
-        duration: `${(5 + Math.random() * 7).toFixed(2)}s`,
-        chars: Array.from({ length: 15 }).map(() => Math.round(Math.random())).join('')
+        delay: `${(Math.random() * 5).toFixed(2)}s`,
+        duration: `${(8 + Math.random() * 10).toFixed(2)}s`,
+        // Reduce number of characters per column from 15 to 8
+        chars: Array.from({ length: 8 }).map(() => Math.round(Math.random())).join('')
       }));
       setRainData(data);
       setMounted(true);
     };
-    
-    setTimeout(generateRain, 0);
+
+    const timeout = setTimeout(generateRain, 100);
     window.addEventListener('resize', generateRain);
-    return () => window.removeEventListener('resize', generateRain);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', generateRain);
+    };
   }, []);
+
 
   if (!mounted || rainData.length === 0) return <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none" />;
 

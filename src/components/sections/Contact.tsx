@@ -3,7 +3,6 @@
 import React, { useState, useRef } from 'react';
 import Section from '../ui/Section';
 import { Mail, Send, Loader2, CheckCircle2, ShieldCheck, Wifi, Cpu } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -19,6 +18,9 @@ const Contact = () => {
     setError(null);
 
     try {
+      // Lazy load emailjs to ensure it only runs on the client
+      const emailjs = (await import('@emailjs/browser')).default;
+      
       await emailjs.sendForm(
         'service_c0nwniu', 
         'template_1hbyewt',
