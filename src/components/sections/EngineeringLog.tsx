@@ -3,7 +3,7 @@
 import React from 'react';
 import Section from '../ui/Section';
 import { ENGINEERING_LOGS } from '@/data/portfolio';
-import { Terminal, Calendar, ArrowUpRight, Hash } from 'lucide-react';
+import { Terminal, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EngineeringLog = () => {

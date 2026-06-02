@@ -4,7 +4,6 @@ import React, { useState, useRef } from 'react';
 import Section from '../ui/Section';
 import { Mail, Send, Loader2, CheckCircle2, ShieldCheck, Wifi, Cpu } from 'lucide-react';
 import emailjs from '@emailjs/browser';
-import { motion } from 'framer-motion';
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);

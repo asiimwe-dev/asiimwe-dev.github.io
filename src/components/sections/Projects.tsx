@@ -3,7 +3,7 @@
 import React from 'react';
 import Section from '../ui/Section';
 import { PROJECTS, Project } from '@/data/portfolio';
-import { LayoutGrid, ExternalLink, Github, Terminal } from 'lucide-react';
+import { LayoutGrid, ExternalLink, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 

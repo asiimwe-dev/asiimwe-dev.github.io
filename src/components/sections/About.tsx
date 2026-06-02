@@ -2,11 +2,17 @@
 
 import React from 'react';
 import Section from '../ui/Section';
-import { User, Cpu, GraduationCap, Target, Award, BrainCircuit } from 'lucide-react';
-import { ACADEMIC, PERSONAL_INFO } from '@/data/portfolio';
+import { User, Cpu, GraduationCap, Target, Award, Brain } from 'lucide-react';
+import { ACADEMIC } from '@/data/portfolio';
 import { motion } from 'framer-motion';
 
-const SpecItem = ({ icon: Icon, label, value }: { icon: any, label: string, value: string }) => (
+interface SpecItemProps {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+}
+
+const SpecItem = ({ icon: Icon, label, value }: SpecItemProps) => (
   <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/20 transition-colors group">
     <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
       <Icon size={16} className="text-primary" />
@@ -20,7 +26,7 @@ const SpecItem = ({ icon: Icon, label, value }: { icon: any, label: string, valu
 
 const About = () => {
   return (
-    <Section id="about" title="Engineering Mindset" icon={<BrainCircuit className="w-8 h-8" />}>
+    <Section id="about" title="Engineering Mindset" icon={<Brain className="w-8 h-8" />}>
       <div className="grid lg:grid-cols-12 gap-12 items-start">
         {/* The Persona - Bio */}
         <div className="lg:col-span-7 space-y-8">

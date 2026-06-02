@@ -3,7 +3,7 @@
 import React from 'react';
 import Section from '../ui/Section';
 import { ACADEMIC } from '@/data/portfolio';
-import { GraduationCap, Award, BookOpen, Activity, Cpu } from 'lucide-react';
+import { GraduationCap, Award, Activity, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Academic = () => {

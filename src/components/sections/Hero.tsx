@@ -1,20 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { PERSONAL_INFO } from '@/data/portfolio';
-import { Terminal, ChevronRight, Cpu, Layers, Shield, Zap, Code2 } from 'lucide-react';
+import { ChevronRight, Cpu, Shield, Zap, Code } from 'lucide-react';
 import Image from 'next/image';
+
+const allLogs = [
+  "Initializing Gilbert-OS v4.2.0...",
+  "Loading neural modules...",
+  "Establishing secure link...",
+  "System Status: OPTIMAL",
+  "Welcome, visitor.",
+];
 
 const TerminalConsole = () => {
   const [logs, setLogs] = useState<string[]>([]);
-  const allLogs = [
-    "Initializing Gilbert-OS v4.2.0...",
-    "Loading neural modules...",
-    "Establishing secure link...",
-    "System Status: OPTIMAL",
-    "Welcome, visitor.",
-  ];
 
   useEffect(() => {
     let currentLogIndex = 0;
@@ -63,7 +64,15 @@ const TerminalConsole = () => {
   );
 };
 
-const FloatingBadge = ({ icon: Icon, delay, x, y, label }: { icon: any, delay: number, x: string, y: string, label: string }) => (
+interface BadgeProps {
+  icon: React.ElementType;
+  delay: number;
+  x: string;
+  y: string;
+  label: string;
+}
+
+const FloatingBadge = ({ icon: Icon, delay, x, y, label }: BadgeProps) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ 
@@ -86,28 +95,45 @@ const FloatingBadge = ({ icon: Icon, delay, x, y, label }: { icon: any, delay: n
   </motion.div>
 );
 
+interface RainColumn {
+  delay: number;
+  duration: number;
+  chars: number[];
+}
+
 const BinaryRain = () => {
-  const [columns, setColumns] = useState<number>(20);
+  const [rainData, setRainData] = useState<RainColumn[]>([]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const handleResize = () => {
-      setColumns(Math.floor(window.innerWidth / 60));
+    const generateRain = () => {
+      const columns = Math.floor(window.innerWidth / 60);
+      const data = Array.from({ length: columns }).map(() => ({
+        delay: Math.random() * 8,
+        duration: 4 + Math.random() * 6,
+        chars: Array.from({ length: 15 }).map(() => Math.round(Math.random()))
+      }));
+      setRainData(data);
+      setMounted(true);
     };
     
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    // Use a small delay to avoid "synchronous setState in effect" lint error
+    const timeout = setTimeout(generateRain, 0);
+    
+    window.addEventListener('resize', generateRain);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', generateRain);
+    };
   }, []);
 
-  if (!mounted) return <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none" />;
+  if (!mounted || rainData.length === 0) return <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none" />;
 
   return (
     <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none flex justify-around">
-      {Array.from({ length: columns }).map((_, i) => (
+      {rainData.map((col, i) => (
         <div key={i} className="flex flex-col text-[10px] leading-none text-primary whitespace-nowrap">
-          {Array.from({ length: 15 }).map((_, j) => (
+          {col.chars.map((char, j) => (
             <motion.span
               key={j}
               initial={{ opacity: 0, y: -20 }}
@@ -116,14 +142,14 @@ const BinaryRain = () => {
                 y: [0, 60, 120],
               }}
               transition={{
-                duration: 4 + Math.random() * 6,
+                duration: col.duration,
                 repeat: Infinity,
-                delay: Math.random() * 8,
+                delay: col.delay,
                 ease: "linear"
               }}
               style={{ willChange: "transform, opacity" }}
             >
-              {Math.round(Math.random())}
+              {char}
             </motion.span>
           ))}
         </div>
@@ -220,7 +246,7 @@ const Hero = () => {
 
             {/* Floating Badges */}
             <FloatingBadge icon={Cpu} delay={0.5} x="-15%" y="10%" label="Systems" />
-            <FloatingBadge icon={Code2} delay={1.2} x="90%" y="-5%" label="Fullstack" />
+            <FloatingBadge icon={Code} delay={1.2} x="90%" y="-5%" label="Fullstack" />
             <FloatingBadge icon={Zap} delay={0.8} x="85%" y="70%" label="AI" />
             <FloatingBadge icon={Shield} delay={1.5} x="-10%" y="60%" label="Security" />
 

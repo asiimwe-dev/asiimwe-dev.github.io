@@ -3,17 +3,17 @@
 import React from 'react';
 import Section from '../ui/Section';
 import { SKILLS } from '@/data/portfolio';
-import { Cpu, Terminal, ShieldCheck, Binary, Cog, Database, Network } from 'lucide-react';
+import { Cpu, Terminal, Code, Settings, Database, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Skills = () => {
   const getIcon = (category: string) => {
     switch (category) {
-      case 'Languages': return <Binary className="text-primary" size={24} />;
+      case 'Languages': return <Code className="text-primary" size={24} />;
       case 'Systems/OS': return <Cpu className="text-primary" size={24} />;
-      case 'DevOps': return <Cog className="text-primary" size={24} />;
+      case 'DevOps': return <Settings className="text-primary" size={24} />;
       case 'Backend': return <Database className="text-primary" size={24} />;
-      case 'Networking': return <Network className="text-primary" size={24} />;
+      case 'Networking': return <Share2 className="text-primary" size={24} />;
       default: return <Terminal className="text-primary" size={24} />;
     }
   };
