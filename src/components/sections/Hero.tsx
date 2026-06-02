@@ -16,8 +16,12 @@ const allLogs = [
 
 const TerminalConsole = () => {
   const [logs, setLogs] = useState<string[]>([]);
+  const [time, setTime] = useState("");
 
   useEffect(() => {
+    const updateTime = () => setTime(new Date().toLocaleTimeString([], { hour12: false }));
+    setTimeout(updateTime, 0);
+    
     let currentLogIndex = 0;
     const interval = setInterval(() => {
       if (currentLogIndex < allLogs.length) {
@@ -47,7 +51,7 @@ const TerminalConsole = () => {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-start gap-2"
           >
-            <span className="text-primary/30 shrink-0">[{new Date().toLocaleTimeString([], { hour12: false })}]</span>
+            <span className="text-primary/30 shrink-0">[{time}]</span>
             <span className={log.includes('OPTIMAL') ? 'text-green-400' : ''}>$ {log}</span>
           </motion.div>
         ))}
@@ -96,9 +100,9 @@ const FloatingBadge = ({ icon: Icon, delay, x, y, label }: BadgeProps) => (
 );
 
 interface RainColumn {
-  delay: number;
-  duration: number;
-  chars: number[];
+  delay: string;
+  duration: string;
+  chars: string;
 }
 
 const BinaryRain = () => {
@@ -109,22 +113,17 @@ const BinaryRain = () => {
     const generateRain = () => {
       const columns = Math.floor(window.innerWidth / 60);
       const data = Array.from({ length: columns }).map(() => ({
-        delay: Math.random() * 8,
-        duration: 4 + Math.random() * 6,
-        chars: Array.from({ length: 15 }).map(() => Math.round(Math.random()))
+        delay: `${(Math.random() * 8).toFixed(2)}s`,
+        duration: `${(5 + Math.random() * 7).toFixed(2)}s`,
+        chars: Array.from({ length: 15 }).map(() => Math.round(Math.random())).join('')
       }));
       setRainData(data);
       setMounted(true);
     };
     
-    // Use a small delay to avoid "synchronous setState in effect" lint error
-    const timeout = setTimeout(generateRain, 0);
-    
+    setTimeout(generateRain, 0);
     window.addEventListener('resize', generateRain);
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('resize', generateRain);
-    };
+    return () => window.removeEventListener('resize', generateRain);
   }, []);
 
   if (!mounted || rainData.length === 0) return <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none" />;
@@ -132,25 +131,17 @@ const BinaryRain = () => {
   return (
     <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none select-none flex justify-around">
       {rainData.map((col, i) => (
-        <div key={i} className="flex flex-col text-[10px] leading-none text-primary whitespace-nowrap">
-          {col.chars.map((char, j) => (
-            <motion.span
-              key={j}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{
-                opacity: [0, 1, 0],
-                y: [0, 60, 120],
-              }}
-              transition={{
-                duration: col.duration,
-                repeat: Infinity,
-                delay: col.delay,
-                ease: "linear"
-              }}
-              style={{ willChange: "transform, opacity" }}
-            >
-              {char}
-            </motion.span>
+        <div 
+          key={i} 
+          className="binary-rain-column flex flex-col text-[10px] leading-none text-primary whitespace-nowrap"
+          style={{ 
+            animationDelay: col.delay, 
+            animationDuration: col.duration,
+            willChange: 'transform, opacity'
+          }}
+        >
+          {col.chars.split('').map((char, j) => (
+            <span key={j} className="py-1">{char}</span>
           ))}
         </div>
       ))}
