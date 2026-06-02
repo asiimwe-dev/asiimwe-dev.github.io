@@ -238,7 +238,7 @@ const Hero = () => {
               </div>
               
               {/* Profile Glow */}
-              <div className="absolute -inset-4 bg-primary/20 blur-3xl -z-10 rounded-full animate-pulse" />
+              <div className="absolute -inset-4 bg-primary/20 blur-3xl -z-10 rounded-full" />
             </motion.div>
 
             {/* Floating Badges */}
