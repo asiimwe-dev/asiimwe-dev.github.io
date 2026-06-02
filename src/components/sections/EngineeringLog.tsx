@@ -3,13 +3,13 @@
 import React from 'react';
 import Section from '../ui/Section';
 import { ENGINEERING_LOGS } from '@/data/portfolio';
-import { BookText, Calendar, ArrowUpRight } from 'lucide-react';
+import { Terminal, Calendar, ArrowUpRight, Hash } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EngineeringLog = () => {
   return (
-    <Section id="blog" title="Engineering Log" icon={<BookText className="w-8 h-8" />}>
-      <div className="space-y-6 max-w-4xl mx-auto">
+    <Section id="blog" title="Console Output" icon={<Terminal className="w-8 h-8" />}>
+      <div className="space-y-4 max-w-5xl mx-auto">
         {ENGINEERING_LOGS.map((log, idx) => (
           <motion.div
             key={log.id}
@@ -17,36 +17,49 @@ const EngineeringLog = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.1 }}
-            className="glass-card p-6 md:p-8 rounded-3xl group flex flex-col md:flex-row gap-6 hover:bg-white/5 transition-all duration-300"
+            className="glass-card p-4 md:p-6 rounded-2xl group border-l-2 border-l-primary/30 hover:border-l-primary transition-all duration-300 relative overflow-hidden"
           >
-            <div className="flex-shrink-0 flex flex-row md:flex-col items-center md:items-start gap-2 md:gap-0 text-secondary border-b md:border-b-0 md:border-r border-white/10 pb-4 md:pb-0 md:pr-8 md:min-w-[120px]">
-              <Calendar size={14} className="mb-0 md:mb-2" />
-              <span className="text-xs font-bold uppercase tracking-widest">{log.date}</span>
+            <div className="flex flex-col md:flex-row md:items-center gap-4">
+              <div className="flex items-center gap-3 min-w-[140px]">
+                <span className="text-primary font-mono text-xs font-bold">[LOG]</span>
+                <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">{log.date}</span>
+              </div>
+              
+              <div className="flex-grow">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-base md:text-lg font-mono font-bold text-white group-hover:text-primary transition-colors tracking-tight">
+                    {log.title}
+                  </h3>
+                  <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-[10px] font-mono text-primary/40">READ_MORE</span>
+                    <ArrowUpRight size={16} className="text-primary" />
+                  </div>
+                </div>
+                
+                <p className="text-secondary text-xs md:text-sm mt-1 mb-4 font-mono leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                  &gt; {log.excerpt}
+                </p>
+                
+                <div className="flex flex-wrap gap-3">
+                  {log.tags.map((tag) => (
+                    <span key={tag} className="flex items-center gap-1 text-[10px] font-mono text-primary/60 hover:text-primary transition-colors cursor-default">
+                      <span className="text-primary/30">--</span>{tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
             
-            <div className="flex-grow">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{log.title}</h3>
-                <ArrowUpRight size={20} className="text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <p className="text-secondary text-sm mb-4 leading-relaxed">
-                {log.excerpt}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {log.tags.map((tag) => (
-                  <span key={tag} className="text-[10px] font-mono text-primary/70 bg-primary/5 px-2 py-1 rounded">
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+            {/* Very subtle scanline for individual entries */}
+            <div className="scanline opacity-5" />
           </motion.div>
         ))}
       </div>
       
-      <div className="mt-12 text-center">
-        <p className="text-secondary text-sm italic">
-          More technical logs coming soon. System expansion in progress...
+      <div className="mt-12 flex flex-col items-center gap-4">
+        <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <p className="text-secondary text-[10px] font-mono uppercase tracking-[0.3em] animate-pulse">
+          End of Buffer | Awaiting Next Input
         </p>
       </div>
     </Section>
