@@ -48,7 +48,12 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                {project.icon}
              </div>
              <div>
-               <h3 className={`text-2xl font-black tracking-tighter text-white group-hover:text-primary transition-colors`}>{project.title}</h3>
+               <h3 
+                 className={`text-2xl font-black tracking-tighter text-white group-hover:text-primary transition-colors glitch-text`}
+                 data-text={project.title}
+               >
+                 {project.title}
+               </h3>
                <p className={`text-[10px] uppercase tracking-[0.2em] font-bold opacity-60`}>Project_Module_{index + 1}</p>
              </div>
           </div>

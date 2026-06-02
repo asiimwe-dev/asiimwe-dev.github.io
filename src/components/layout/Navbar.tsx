@@ -19,9 +19,9 @@ const Navbar = () => {
     <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
       <div className="glass px-2 md:px-4 py-2 rounded-2xl flex items-center gap-1 md:gap-4 max-w-full overflow-x-auto no-scrollbar border-primary/20 shadow-[0_0_20px_rgba(56,189,248,0.1)]">
         {/* System Prefix */}
-        <div className="hidden md:flex items-center gap-2 px-3 border-r border-white/10 mr-2">
+        <div className="hidden md:flex items-center gap-2 px-3 border-r border-white/10 mr-2 group/version">
            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-           <span className="text-[10px] font-mono font-bold text-primary/60 tracking-widest">G-OS v4.2</span>
+           <span className="text-[10px] font-mono font-bold text-primary/60 tracking-widest glitch-text" data-text="G-OS v4.2">G-OS v4.2</span>
         </div>
 
         {navLinks.map((link) => (

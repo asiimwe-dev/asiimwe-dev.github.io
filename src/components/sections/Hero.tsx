@@ -5,68 +5,7 @@ import { motion } from 'framer-motion';
 import { PERSONAL_INFO } from '@/data/portfolio';
 import { ChevronRight, Cpu, Shield, Zap, Code } from 'lucide-react';
 import Image from 'next/image';
-
-const allLogs = [
-  "Initializing Gilbert-OS v4.2.0...",
-  "Loading neural modules...",
-  "Establishing secure link...",
-  "System Status: OPTIMAL",
-  "Welcome, visitor.",
-];
-
-const TerminalConsole = () => {
-  const [logs, setLogs] = useState<string[]>([]);
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => setTime(new Date().toLocaleTimeString([], { hour12: false }));
-    setTimeout(updateTime, 0);
-    
-    let currentLogIndex = 0;
-    const interval = setInterval(() => {
-      if (currentLogIndex < allLogs.length) {
-        setLogs(prev => [...prev, allLogs[currentLogIndex]]);
-        currentLogIndex++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 800);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="w-full max-w-lg mx-auto bg-black/80 rounded-lg border border-primary/20 p-4 font-mono text-[10px] md:text-xs text-primary/80 shadow-[0_0_20px_rgba(56,189,248,0.1)] relative overflow-hidden group">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      <div className="flex gap-1.5 mb-3 border-b border-primary/10 pb-2">
-        <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/40" />
-        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/40" />
-        <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/40" />
-        <span className="ml-2 text-[8px] uppercase tracking-widest text-primary/40">system_console</span>
-      </div>
-      <div className="space-y-1 h-32 overflow-hidden">
-        {logs.map((log, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: -5 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-start gap-2"
-          >
-            <span className="text-primary/30 shrink-0">[{time}]</span>
-            <span className={log.includes('OPTIMAL') ? 'text-green-400' : ''}>$ {log}</span>
-          </motion.div>
-        ))}
-        {logs.length < allLogs.length && (
-          <motion.div
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 0.8, repeat: Infinity }}
-            className="w-2 h-4 bg-primary/40"
-          />
-        )}
-      </div>
-      <div className="scanline" />
-    </div>
-  );
-};
+import InteractiveTerminal from '@/components/ui/InteractiveTerminal';
 
 interface BadgeProps {
   icon: React.ElementType;
@@ -252,9 +191,9 @@ const Hero = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 1 }}
-              className="absolute -bottom-12 -left-12 hidden md:block z-30"
+              className="absolute -bottom-12 -left-12 hidden md:block z-30 w-full"
             >
-              <TerminalConsole />
+              <InteractiveTerminal />
             </motion.div>
           </div>
         </div>

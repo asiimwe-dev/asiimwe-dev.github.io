@@ -86,7 +86,7 @@ const Contact = () => {
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 relative z-10">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="user_name" className="text-[10px] font-mono font-bold text-primary/40 uppercase tracking-widest ml-1">Identity_Name</label>
+                  <label htmlFor="user_name" className="text-[10px] font-mono font-bold text-primary/40 uppercase tracking-widest ml-1 glitch-text" data-text="Identity_Name">Identity_Name</label>
                   <input
                     type="text"
                     id="user_name"
@@ -97,7 +97,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="user_email" className="text-[10px] font-mono font-bold text-primary/40 uppercase tracking-widest ml-1">Uplink_Address</label>
+                  <label htmlFor="user_email" className="text-[10px] font-mono font-bold text-primary/40 uppercase tracking-widest ml-1 glitch-text" data-text="Uplink_Address">Uplink_Address</label>
                   <input
                     type="email"
                     id="user_email"

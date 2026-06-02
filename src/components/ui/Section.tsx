@@ -30,8 +30,11 @@ const Section: React.FC<SectionProps> = ({ children, id, className, title, icon 
                 {icon}
               </div>
             )}
-            <div className="flex flex-col">
-              <span className="text-[10px] font-mono text-primary/40 uppercase tracking-[0.3em] font-bold leading-none mb-1">
+            <div className="flex flex-col group/title">
+              <span 
+                className="text-[10px] font-mono text-primary/40 uppercase tracking-[0.3em] font-bold leading-none mb-1 glitch-text"
+                data-text={`Systems_Module_${id?.toUpperCase() || 'DATA'}`}
+              >
                 Systems_Module_{id?.toUpperCase() || 'DATA'}
               </span>
               <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase italic">
@@ -51,8 +54,11 @@ const Section: React.FC<SectionProps> = ({ children, id, className, title, icon 
         {children}
       </div>
       
-      {/* Vertical Section Indicator */}
-      <div className="absolute left-0 top-0 h-full w-[1px] bg-gradient-to-b from-primary/20 via-primary/5 to-transparent hidden lg:block -ml-8" />
+      {/* Vertical Section Indicator with Data Packets */}
+      <div className="absolute left-0 top-0 h-full w-[1px] bg-gradient-to-b from-primary/20 via-primary/5 to-transparent hidden lg:block -ml-8 overflow-visible">
+        <div className="data-packet" style={{ animationDelay: '0s', animationDuration: '4s' }} />
+        <div className="data-packet" style={{ animationDelay: '2s', animationDuration: '7s' }} />
+      </div>
     </motion.section>
   );
 };
