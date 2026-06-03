@@ -59,55 +59,21 @@ const CustomCursor = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] hidden lg:block">
-      {/* Main Crosshair */}
+      {/* Circle Cursor */}
       <motion.div
-        className="absolute w-8 h-8 border border-primary/40 rounded-sm"
+        className="absolute w-6 h-6 rounded-full border border-primary/50"
         style={{
           x: smoothX,
           y: smoothY,
           translateX: '-50%',
           translateY: '-50%',
           scale: isHovering ? 1.5 : 1,
-          rotate: isHovering ? 45 : 0,
         }}
         animate={{
-          borderColor: isHovering ? 'rgba(56, 189, 248, 1)' : 'rgba(56, 189, 248, 0.4)',
-          backgroundColor: isClicking ? 'rgba(56, 189, 248, 0.1)' : 'rgba(56, 189, 248, 0)',
+          backgroundColor: isClicking ? 'rgba(56, 189, 248, 0.2)' : 'rgba(56, 189, 248, 0)',
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-      >
-        {/* Corner Brackets */}
-        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-primary" />
-        <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-primary" />
-        <div className="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-primary" />
-        <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-primary" />
-      </motion.div>
-
-      {/* Center Dot */}
-      <motion.div
-        className="absolute w-1 h-1 bg-primary rounded-full"
-        style={{
-          x: mouseX,
-          y: mouseY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
       />
-
-      {/* Hover Label */}
-      <motion.div
-        className="absolute ml-6 mt-6 px-2 py-1 bg-midnight border border-primary/20 rounded text-[8px] font-mono text-primary font-bold uppercase tracking-widest"
-        style={{
-          x: mouseX,
-          y: mouseY,
-        }}
-        animate={{
-          opacity: isHovering ? 1 : 0,
-          scale: isHovering ? 1 : 0.8,
-        }}
-      >
-        Target_Locked
-      </motion.div>
     </div>
   );
 };
