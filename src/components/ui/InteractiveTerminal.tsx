@@ -26,10 +26,12 @@ const InteractiveTerminal = () => {
   const [history, setLogs] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [isBooting, setIsBooting] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    setTimeout(() => setIsMounted(true), 0);
     let currentLogIndex = 0;
     const interval = setInterval(() => {
       if (currentLogIndex < BOOT_LOGS.length) {
@@ -96,8 +98,10 @@ const InteractiveTerminal = () => {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-start gap-2"
             >
-              <span className="text-primary/30 shrink-0">[{new Date().toLocaleTimeString([], { hour12: false, minute: '2-digit', second: '2-digit' })}]</span>
-              <span className={log.includes('OPTIMAL') || log.startsWith('$') ? 'text-white' : 'text-primary/70'}>
+              <span className="text-primary/30 shrink-0">
+                [{isMounted ? new Date().toLocaleTimeString([], { hour12: false, minute: '2-digit', second: '2-digit' }) : '--:--:--'}]
+              </span>
+              <span className={(log?.includes('OPTIMAL') || log?.startsWith('$')) ? 'text-white' : 'text-primary/70'}>
                 {log}
               </span>
             </motion.div>

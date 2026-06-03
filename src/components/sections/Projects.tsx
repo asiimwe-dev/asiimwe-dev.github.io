@@ -7,15 +7,17 @@ import { LayoutGrid, ExternalLink, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const getProjectTheme = (id: string) => {
-  if (id.includes('farmer')) return 'border-agri/20 hover:border-agri/50 text-agri';
-  if (id.includes('petro')) return 'border-energy/20 hover:border-energy/50 text-energy';
+const getProjectTheme = (id: string | undefined) => {
+  const safeId = id || '';
+  if (safeId.includes('farmer')) return 'border-agri/20 hover:border-agri/50 text-agri';
+  if (safeId.includes('petro')) return 'border-energy/20 hover:border-energy/50 text-energy';
   return 'border-primary/20 hover:border-primary/50 text-primary';
 };
 
-const getProjectAccent = (id: string) => {
-  if (id.includes('farmer')) return 'bg-agri';
-  if (id.includes('petro')) return 'bg-energy';
+const getProjectAccent = (id: string | undefined) => {
+  const safeId = id || '';
+  if (safeId.includes('farmer')) return 'bg-agri';
+  if (safeId.includes('petro')) return 'bg-energy';
   return 'bg-primary';
 };
 
