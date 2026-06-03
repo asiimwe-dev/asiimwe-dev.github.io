@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import Section from '../ui/Section';
+import Section from '@/components/ui/Section';
 import { Mail, Send, Loader2, CheckCircle2, ShieldCheck, Wifi, Cpu } from 'lucide-react';
 
 const Contact = () => {

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Section from '../ui/Section';
+import Section from '@/components/ui/Section';
 import { ENGINEERING_LOGS } from '@/data/portfolio';
 import { Terminal, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';

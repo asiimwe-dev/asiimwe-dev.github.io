@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import Section from '../ui/Section';
+import Section from '@/components/ui/Section';
 import { SKILLS } from '@/data/portfolio';
 import { Cpu, Terminal, Code, Settings, Database, Share2, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
-import SkillRadar from '../ui/SkillRadar';
+import SkillRadar from '@/components/ui/SkillRadar';
 
 const Skills = () => {
   const getIcon = (category: string) => {

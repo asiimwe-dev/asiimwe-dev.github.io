@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Section from '../ui/Section';
+import Section from '@/components/ui/Section';
 import { PROJECTS, Project } from '@/data/portfolio';
 import { LayoutGrid, ExternalLink, Github } from 'lucide-react';
 import { motion } from 'framer-motion';

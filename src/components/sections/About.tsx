@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Section from '../ui/Section';
+import Section from '@/components/ui/Section';
 import { User, Cpu, GraduationCap, Target, Award, Brain } from 'lucide-react';
 import { ACADEMIC } from '@/data/portfolio';
 import { motion } from 'framer-motion';
