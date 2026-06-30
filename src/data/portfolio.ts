@@ -42,7 +42,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "petrostack",
-    title: "PetroStack",
+    title: "PetroStack Technologies",
     description: "Data management platform addressing challenges in Uganda’s petroleum sector.",
     image: "/assets/oil and gas.jpg",
     icon: "⛽",
