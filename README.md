@@ -5,7 +5,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-blue?logo=tailwind-css)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-A high-performance, architecturally sound portfolio showcasing the work and engineering mindset of **Asiimwe Gilbert**, an AI Full-Stack & Systems Engineer.
+This is a personal portfolio website for Asiimwe Gilbert, a systems engineer and software developer. The site showcases a collection of projects, technical skills, and professional experiences.
 
 **Live Site:** [asiimwe-dev.github.io](https://asiimwe-dev.github.io/)
 
@@ -13,9 +13,10 @@ A high-performance, architecturally sound portfolio showcasing the work and engi
 
 ## 🏗️ Architectural Overview
 
-This project was built with a "Systems First" approach, prioritizing performance, scalability, and clean separation of concerns.
+This project is built with a "Systems First" approach, prioritizing performance, scalability, and clean separation of concerns.
 
 ### Tech Stack
+
 - **Framework**: [Next.js 15 (App Router)](https://nextjs.org/) for optimized routing and server-side rendering capability.
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) for a utility-first, highly maintainable design system.
 - **Animations**: [Framer Motion](https://www.framer.com/motion/) for hardware-accelerated, high-frame-rate interactive elements.
@@ -23,7 +24,8 @@ This project was built with a "Systems First" approach, prioritizing performance
 - **Language**: [TypeScript](https://www.typescriptlang.org/) for strict type safety across the data model and UI components.
 
 ### Key Engineering Features
-- **Performance Optimized**: 
+
+- **Performance Optimized**:
   - Implementation of `will-change` CSS hints for GPU-accelerated transforms.
   - Reduced complexity in `BinaryRain` animation (75% element reduction) for mobile CPU efficiency.
   - Optimized backdrop-blur intensity to maintain 60fps scrolling.
@@ -54,10 +56,12 @@ This project was built with a "Systems First" approach, prioritizing performance
 ## 🛠️ Local Development
 
 ### Prerequisites
+
 - Node.js 18.x or later
 - npm or yarn
 
 ### Installation
+
 ```bash
 git clone https://github.com/asiimwe-dev/asiimwe-dev.github.io.git
 cd asiimwe-dev.github.io
@@ -65,13 +69,17 @@ npm install
 ```
 
 ### Development Server
+
 ```bash
 npm run dev
 ```
+
 Navigate to `http://localhost:3000` to view the development environment.
 
 ### Production Build
+
 To verify the static export locally:
+
 ```bash
 npm run build
 ```
@@ -92,4 +100,4 @@ This repository uses **GitHub Actions** for seamless deployment.
 ## 📜 Professional Standard
 
 Designed and engineered with precision by **Asiimwe Gilbert** © 2026.  
-*Building scalable systems that drive regional economic evolution.*
+_Building scalable systems that drive regional economic evolution._
