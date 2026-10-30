@@ -17,15 +17,15 @@ export interface Skill {
 
 export const PERSONAL_INFO = {
   name: "Asiimwe Gilbert",
-  role: "AI Full-Stack & Systems Engineer",
+  role: "Aspiring Systems Engineer",
   tagline:
-    "Building scalable solutions for real-world problems | AI Full Stack and Systems Engineer",
-  bio: "Senior CS student at Mbarara University of Science and Technology (MUST) with a 4.13 CGPA. Passionate about solving regional economic challenges through energy and agri-tech innovations. Systems-oriented mindset focused on scalability and efficiency.",
-  email: "gilbertasiimwe00@gmail.com",
+    "Building scalable solutions for real-world problems | Aspiring Systems Engineer",
+  bio: "Computer Science Student at Mbarara University of Science and Technology. Passionate about using software solutions to solve real-world problems",
+  email: "gilbert.asiimwe.dev@gmail.com",
   github: "https://github.com/asiimwe-dev",
   linkedin: "https://linkedin.com/in/gilbert-asiimwe",
   twitter: "https://x.com/asiimwe_dev",
-  instagram: "https://instagram.com/asiimwe_dev",
+  instagram: "https://instagram.com/gilbert.a.amooti",
   whatsapp: "https://wa.me/256764502179",
   resumeUrl: "/assets/resume.pdf",
 };
@@ -122,7 +122,7 @@ export const ENGINEERING_LOGS: EngineeringLog[] = [
 
 export const ACADEMIC = {
   institution: "Mbarara University of Science and Technology (MUST)",
-  achievement: "4.13 CGPA",
+  achievement: "4.06 CGPA - Provisional",
   competencies: [
     "Data Structures & Algorithms (DSA)",
     "Object-Oriented Programming (Java)",

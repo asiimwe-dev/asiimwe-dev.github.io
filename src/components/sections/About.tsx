@@ -30,11 +30,7 @@ const SpecItem = ({ icon: Icon, label, value }: SpecItemProps) => (
 
 const About = () => {
   return (
-    <Section
-      id="about"
-      title="Engineering Mindset"
-      icon={<Brain className="w-8 h-8" />}
-    >
+    <Section id="about" title="About Me" icon={<Brain className="w-8 h-8" />}>
       <div className="grid lg:grid-cols-12 gap-12 items-start">
         {/* The Persona - Bio */}
         <div className="lg:col-span-7 space-y-8">
@@ -53,7 +49,8 @@ const About = () => {
               solutions for regional socio-economic challenges.
             </p>
             <p>
-              My methodology is defined by the{" "}
+              My passion comes from having the ability to use the software to
+              achitect systems that can change lives, something I like to call{" "}
               <span className="text-primary font-mono italic">
                 Systems Mindset
               </span>
@@ -76,7 +73,7 @@ const About = () => {
               <div className="mt-4 flex items-center gap-2">
                 <div className="h-[1px] w-8 bg-primary/40" />
                 <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary/60">
-                  Gilbert-OS Core Philosophy
+                  Gilbert Core Philosophy
                 </span>
               </div>
             </div>
@@ -99,10 +96,10 @@ const About = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold tracking-tight text-white">
-                  System Specs
+                  ME IN A GLANCE
                 </h3>
                 <p className="text-[10px] uppercase tracking-widest text-primary/40 font-bold leading-none">
-                  Identity: gilbert_asiimwe.sys
+                  Name: gilbert asiimwe
                 </p>
               </div>
             </div>
@@ -110,13 +107,13 @@ const About = () => {
             <div className="space-y-3">
               <SpecItem
                 icon={GraduationCap}
-                label="Academic Core"
+                label="Academics"
                 value={ACADEMIC.institution}
               />
               <SpecItem
                 icon={Award}
-                label="Performance Metric"
-                value={`${ACADEMIC.achievement} CGPA`}
+                label="Peformaance"
+                value={`${ACADEMIC.achievement}`}
               />
               <SpecItem
                 icon={Target}
@@ -125,14 +122,14 @@ const About = () => {
               />
               <SpecItem
                 icon={User}
-                label="Status"
-                value="Senior CS Student (MUST)"
+                label="Employment"
+                value="Computer Science Student (MUST)"
               />
             </div>
 
             <div className="mt-8 pt-8 border-t border-white/5">
               <p className="text-[10px] uppercase tracking-widest text-primary/40 font-bold mb-4">
-                Competency Nodes
+                Competence
               </p>
               <div className="flex flex-wrap gap-2">
                 {ACADEMIC.competencies.map((comp) => (

@@ -50,7 +50,8 @@ const Footer = () => {
               Asiimwe Gilbert
             </h3>
             <p className="text-secondary text-sm max-w-sm">
-              Systems Engineer & AI Developer building for the future.
+              Aspiring Systems Engineer and AI Enthusiast passionate about
+              bulding autonomous systems.
             </p>
           </div>
 
