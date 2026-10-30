@@ -1,11 +1,11 @@
-# Systems Engineering Portfolio | Asiimwe Gilbert
+# Personal Portifolio Static Website | Asiimwe Gilbert
 
 [![Deploy static content to Pages](https://github.com/asiimwe-dev/asiimwe-dev.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/asiimwe-dev/asiimwe-dev.github.io/actions/workflows/deploy.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-blue?logo=tailwind-css)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-This is a personal portfolio website for Asiimwe Gilbert, a systems engineer and software developer. The site showcases a collection of projects, technical skills, and professional experiences.
+> Hello, My name is **Asiimwe Gilbert**. A computer science student at Mbarara University of Science and Technology. This is my personal portifolio website, thanks for checking it out.
 
 **Live Site:** [asiimwe-dev.github.io](https://asiimwe-dev.github.io/)
 
@@ -13,7 +13,7 @@ This is a personal portfolio website for Asiimwe Gilbert, a systems engineer and
 
 ## 🏗️ Architectural Overview
 
-This project is built with a "Systems First" approach, prioritizing performance, scalability, and clean separation of concerns.
+This site is built with a modern web tech stack that chosen for scalability robustness, and highly animated. My initial choice for the stack was actually not based on any specific reason since I first built this in my first year of University but it turns out that I didn't make the wrong choice.
 
 ### Tech Stack
 
@@ -99,5 +99,5 @@ This repository uses **GitHub Actions** for seamless deployment.
 
 ## 📜 Professional Standard
 
-Designed and engineered with precision by **Asiimwe Gilbert** © 2026.  
+Designed and engineered with precision by **Asiimwe Gilbert** © 2026.
 _Building scalable systems that drive regional economic evolution._
