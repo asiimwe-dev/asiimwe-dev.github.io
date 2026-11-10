@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useRef } from 'react';
-import Section from '@/components/ui/Section';
-import { Mail, Send, Loader2, CheckCircle2 } from 'lucide-react';
+import React, { useState, useRef } from "react";
+import Section from "@/components/ui/Section";
+import { Mail, Send, Loader2, CheckCircle2 } from "lucide-react";
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -18,33 +18,42 @@ const Contact = () => {
     setError(null);
 
     try {
-      const emailjs = (await import('@emailjs/browser')).default;
-      
+      const emailjs = (await import("@emailjs/browser")).default;
+
       await emailjs.sendForm(
-        'service_c0nwniu', 
-        'template_1hbyewt',
+        "service_c0nwniu",
+        "template_1hbyewt",
         formRef.current,
-        '9iNbL_qYzCE4wmWMX'
+        "9iNbL_qYzCE4wmWMX",
       );
 
       setIsSent(true);
       formRef.current.reset();
       setTimeout(() => setIsSent(false), 5000);
     } catch (err) {
-      console.error('EmailJS Error:', err);
-      setError('Failed to send message. Please try again.');
+      console.error("EmailJS Error:", err);
+      setError("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <Section id="contact" title="Get in Touch" icon={<Mail className="w-8 h-8" />}>
+    <Section
+      id="contact"
+      title="Get in Touch"
+      icon={<Mail className="w-8 h-8" />}
+    >
       <div className="max-w-3xl mx-auto glass-card p-8 md:p-12 rounded-3xl border-white/10">
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label htmlFor="user_name" className="text-sm font-bold text-white uppercase tracking-widest">Name</label>
+              <label
+                htmlFor="user_name"
+                className="text-sm font-bold text-white uppercase tracking-widest"
+              >
+                Name
+              </label>
               <input
                 type="text"
                 id="user_name"
@@ -55,7 +64,12 @@ const Contact = () => {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="user_email" className="text-sm font-bold text-white uppercase tracking-widest">Email</label>
+              <label
+                htmlFor="user_email"
+                className="text-sm font-bold text-white uppercase tracking-widest"
+              >
+                Email
+              </label>
               <input
                 type="email"
                 id="user_email"
@@ -67,7 +81,12 @@ const Contact = () => {
             </div>
           </div>
           <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-bold text-white uppercase tracking-widest">Message</label>
+            <label
+              htmlFor="message"
+              className="text-sm font-bold text-white uppercase tracking-widest"
+            >
+              Message
+            </label>
             <textarea
               id="message"
               name="message"
@@ -77,10 +96,8 @@ const Contact = () => {
               placeholder="How can I help you?"
             />
           </div>
-          
-          {error && (
-            <p className="text-red-400 text-sm font-medium">{error}</p>
-          )}
+
+          {error && <p className="text-red-400 text-sm font-medium">{error}</p>}
 
           <button
             type="submit"

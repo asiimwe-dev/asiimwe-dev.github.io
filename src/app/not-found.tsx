@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Home, AlertTriangle } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Home, AlertTriangle } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -19,13 +19,16 @@ export default function NotFound() {
           <AlertTriangle size={80} className="text-primary animate-pulse" />
         </div>
       </motion.div>
-      
-      <h1 className="text-4xl font-bold mb-4 tracking-tight">System Routing Error</h1>
+
+      <h1 className="text-4xl font-bold mb-4 tracking-tight">
+        System Routing Error
+      </h1>
       <p className="text-secondary max-w-md mb-10 leading-relaxed">
-        The requested module or route could not be initialized. It may have been moved, deleted, or never existed in this architecture.
+        The requested module or route could not be initialized. It may have been
+        moved, deleted, or never existed in this architecture.
       </p>
-      
-      <Link 
+
+      <Link
         href="/"
         className="flex items-center gap-2 bg-primary text-midnight px-8 py-3 rounded-full font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.3)]"
       >

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 const SKILL_DATA = [
-  { subject: 'AI/ML', value: 90, fullMark: 100 },
-  { subject: 'Systems', value: 95, fullMark: 100 },
-  { subject: 'Fullstack', value: 85, fullMark: 100 },
-  { subject: 'DevOps', value: 80, fullMark: 100 },
-  { subject: 'Frontend', value: 88, fullMark: 100 },
+  { subject: "AI/ML", value: 90, fullMark: 100 },
+  { subject: "Systems", value: 95, fullMark: 100 },
+  { subject: "Fullstack", value: 85, fullMark: 100 },
+  { subject: "DevOps", value: 80, fullMark: 100 },
+  { subject: "Frontend", value: 88, fullMark: 100 },
 ];
 
 const SkillRadar = () => {
@@ -22,13 +22,18 @@ const SkillRadar = () => {
     const x = center + r * Math.cos(i * angleStep - Math.PI / 2);
     const y = center + r * Math.sin(i * angleStep - Math.PI / 2);
     return `${x},${y}`;
-  }).join(' ');
+  }).join(" ");
 
   const gridLevels = [0.2, 0.4, 0.6, 0.8, 1];
 
   return (
     <div className="flex justify-center items-center py-10 opacity-80 hover:opacity-100 transition-opacity w-full max-w-[300px] mx-auto aspect-square">
-      <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`} className="overflow-visible">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox={`0 0 ${size} ${size}`}
+        className="overflow-visible"
+      >
         {/* Grid Circles */}
         {gridLevels.map((level) => (
           <circle
@@ -74,8 +79,10 @@ const SkillRadar = () => {
         {/* Labels */}
         {SKILL_DATA.map((d, i) => {
           const labelRadius = radius + 20;
-          const x = center + labelRadius * Math.cos(i * angleStep - Math.PI / 2);
-          const y = center + labelRadius * Math.sin(i * angleStep - Math.PI / 2);
+          const x =
+            center + labelRadius * Math.cos(i * angleStep - Math.PI / 2);
+          const y =
+            center + labelRadius * Math.sin(i * angleStep - Math.PI / 2);
           return (
             <text
               key={i}

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface SectionProps {
   children: React.ReactNode;
@@ -12,7 +12,13 @@ interface SectionProps {
   icon?: React.ReactNode;
 }
 
-const Section: React.FC<SectionProps> = ({ children, id, className, title, icon }) => {
+const Section: React.FC<SectionProps> = ({
+  children,
+  id,
+  className,
+  title,
+  icon,
+}) => {
   return (
     <motion.section
       id={id}

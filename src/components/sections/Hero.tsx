@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { PERSONAL_INFO } from '@/data/portfolio';
-import { ChevronRight, Cpu, Shield, Zap, Code } from 'lucide-react';
-import Image from 'next/image';
+import React from "react";
+import { motion } from "framer-motion";
+import { PERSONAL_INFO } from "@/data/portfolio";
+import { ChevronRight, Cpu, Shield, Zap, Code } from "lucide-react";
+import Image from "next/image";
 
 interface BadgeProps {
   icon: React.ElementType;
@@ -20,7 +20,10 @@ const FeatureBadge = ({ icon: Icon, label }: BadgeProps) => (
 
 const Hero = () => {
   return (
-    <section id="hero" className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-20">
+    <section
+      id="hero"
+      className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-20"
+    >
       <div className="relative w-full max-w-4xl mx-auto z-10 flex flex-col items-center">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -45,7 +48,10 @@ const Hero = () => {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
         >
-          {PERSONAL_INFO.name.split(' ')[0]} <span className="text-primary">{PERSONAL_INFO.name.split(' ')[1]}</span>
+          {PERSONAL_INFO.name.split(" ")[0]}{" "}
+          <span className="text-primary">
+            {PERSONAL_INFO.name.split(" ")[1]}
+          </span>
         </motion.h1>
 
         <motion.p
@@ -80,7 +86,10 @@ const Hero = () => {
             className="group flex items-center gap-2 bg-primary text-midnight px-8 py-3 rounded-full font-bold hover:bg-white transition-all duration-300"
           >
             View Work
-            <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <ChevronRight
+              size={18}
+              className="group-hover:translate-x-1 transition-transform"
+            />
           </a>
           <a
             href={PERSONAL_INFO.resumeUrl}
